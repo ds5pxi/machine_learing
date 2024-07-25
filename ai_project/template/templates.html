@@ -26,7 +26,7 @@
         </header>
         <div class="container-fluid">
             <div class="row">
-                <div class="flex-shrink-0 p-3" style="width: 280px;">       {# 사이드 메뉴, 목록 추가 필요 시 li 태그로 추가 #}
+                <div class="flex-shrink-0 col-md-2">       {# 사이드 메뉴, 목록 추가 필요 시 li 태그로 추가 #}
                     <a href="/main" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
                         <span class="fs-5 fw-semibold">AI 프로젝트</span>
                     </a>
@@ -54,7 +54,7 @@
                         </li>
                     </ul>
                 </div>
-                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <main class="col-md-10 ms-sm-auto">
                     {% block content %}{% endblock %}
                 </main>
             </div>
