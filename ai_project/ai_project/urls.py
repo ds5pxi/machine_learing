@@ -24,4 +24,5 @@ urlpatterns = [
     path('ai_khm/', include('ai_khm.urls')),
     path('ai_chdg/', include('ai_chdg.urls')),
     path('ai_jjw/', include('ai_jjw.urls')),
+    path('ai_ljh/', include('ai_ljh.urls')),
 ]
