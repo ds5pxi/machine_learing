@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import pandas as pd
-import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
 
 # Create your views here.
 def learning(request):
@@ -84,3 +86,22 @@ def divorce_data_preprocessing():
     print('타겟: ', df_target.tail())
 
     return df_data, df_target
+
+def decision_tree_view(request):
+    df_data, df_target = divorce_data_preprocessing()
+
+    X_train, X_test, y_train, y_test = train_test_split(df_data, df_target, test_size=0.3, random_state=62)
+    dt_clf = DecisionTreeClassifier()
+    dt_clf.fit(X_train, y_train)
+
+    pred = dt_clf.predict(X_test)
+
+    content = {
+        "accuracy_score": accuracy_score(y_test, pred),
+        "hyper_param": dt_clf.get_params()
+    }
+
+    return render(request, 'divorce/ai_khm/decision_tree.html', content)
+
+def svm_view(request):
+    return render(request, 'divorce/ai_khm/svm.html')

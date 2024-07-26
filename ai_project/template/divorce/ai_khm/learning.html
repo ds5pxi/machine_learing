@@ -4,6 +4,10 @@
 
 {% load static %}
 
+{% block script %}
+<script src="{% static 'js/divorce/ai_khm/learning.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 <div class="container col-md-10">
     <h1 class="my-5">이혼 확률 데이터</h1>
@@ -32,10 +36,10 @@
 
     <h2 class="mt-5 mb-4">결정 트리 모델 테스트</h2>
 
-    <button type="button" class="btn btn-primary btn-lg">실행</button>
+    <button type="button" class="btn btn-primary btn-lg" onclick="execDT();">실행</button>
 
-    <h2 class="my-4">SVN 모델 테스트</h2>
+    <h2 class="my-4">SVM 모델 테스트</h2>
 
-    <button type="button" class="btn btn-primary btn-lg">실행</button>
+    <button type="button" class="btn btn-primary btn-lg" onclick="execSVM();">실행</button>
 </div>
 {% endblock %}
