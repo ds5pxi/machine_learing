@@ -7,7 +7,35 @@
 {% block content %}
 <div class="container col-md-10">
     <h1 class="my-5">이혼 확률 데이터</h1>
+
+    <div class="card mb-5">
+        <div class="card-header">
+            컬럼에 대한 설명
+        </div>
+        <div class="card-body">
+            <dl class="row">
+             {% for col_nm in col_list %}
+               {% if forloop.counter == 55 %}
+                <dt class="col-sm-1">Divorce</dt>
+               {% else %}
+                <dt class="col-sm-1">Q{{forloop.counter}}</dt>
+               {% endif %}
+
+                <dd class="col-sm-11">{{col_nm}}</dd>
+             {% endfor %}
+            </dl>
+            
+        </div>
+    </div>
     
     {{df_dvc_html|safe}}
+
+    <h2 class="mt-5 mb-4">결정 트리 모델 테스트</h2>
+
+    <button type="button" class="btn btn-primary btn-lg">실행</button>
+
+    <h2 class="my-4">SVN 모델 테스트</h2>
+
+    <button type="button" class="btn btn-primary btn-lg">실행</button>
 </div>
 {% endblock %}
