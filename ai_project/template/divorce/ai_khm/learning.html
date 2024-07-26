@@ -5,5 +5,9 @@
 {% load static %}
 
 {% block content %}
-
+<div class="container col-md-10">
+    <h1 class="my-5">이혼 확률 데이터</h1>
+    
+    {{df_dvc_html|safe}}
+</div>
 {% endblock %}
