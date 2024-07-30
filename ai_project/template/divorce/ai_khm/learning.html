@@ -1,0 +1,45 @@
+{% extends 'templates.html' %}
+
+{% block title %}테스터 김현민 이혼률 확률 분석 사이트{% endblock %}
+
+{% load static %}
+
+{% block script %}
+<script src="{% static 'js/divorce/ai_khm/learning.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container col-md-10">
+    <h1 class="my-5">이혼 확률 데이터</h1>
+
+    <div class="card mb-5">
+        <div class="card-header">
+            컬럼에 대한 설명
+        </div>
+        <div class="card-body">
+            <dl class="row">
+             {% for col_nm in col_list %}
+               {% if forloop.counter == 55 %}
+                <dt class="col-sm-1">Divorce</dt>
+               {% else %}
+                <dt class="col-sm-1">Q{{forloop.counter}}</dt>
+               {% endif %}
+
+                <dd class="col-sm-11">{{col_nm}}</dd>
+             {% endfor %}
+            </dl>
+            
+        </div>
+    </div>
+    
+    {{df_dvc_html|safe}}
+
+    <h2 class="mt-5 mb-4">결정 트리 모델 테스트</h2>
+
+    <button type="button" class="btn btn-primary btn-lg" onclick="execDT();">실행</button>
+
+    <h2 class="my-4">SVM 모델 테스트</h2>
+
+    <button type="button" class="btn btn-primary btn-lg" onclick="execSVM();">실행</button>
+</div>
+{% endblock %}
