@@ -8,6 +8,8 @@ from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LogisticRegression
+import numpy as np
+from django.http import JsonResponse
 
 # Create your views here.
 def learning(request):
@@ -80,6 +82,45 @@ def learning(request):
    
     return render(request, 'divorce/ai_jjw/learning.html', content)
 
+def analyze_divorce(request) :
+    if request.method == 'POST' :
+        scores = [float(request.POST.get(f'score_{i}')) for i in range(1,55)]
+        data = np.array(scores).reshape(1,-1)
+
+        file_path = r'C:\Users\user\Desktop\machine_learing\ai_project\static\file\ai_data\ai_khm\divorce_data.csv'
+        df = pd.read_csv(file_path, sep=';')
+        save = scores + [None] # 이혼 결과를 저장할 자리 비우기, None은 추후 Divorce가 들어갈 자리다
+        df.loc[len(df)] = save
+        df.to_csv(file_path, index=False, sep=';')
+
+        df_data = df.drop(['Divorce'], axis=1)
+        df_target = df['Divorce']
+
+        data_scaled = StandardScaler().fit_transform(df_data)
+        X_train, X_test, y_train, y_test = train_test_split(data_scaled, df_target, test_size=0.3, random_state=62)
+
+        model_choice = request.POST.get('model_choice')
+
+        if model_choice == 'logistic' :
+            model = LogisticRegression()
+        elif model_choice == 'xgboost' :
+            model = XGBClassifier(n_estimators=500, learning_rate=0.1, max_depth=3)
+        else :
+            return JsonResponse({'error' : 'Invalid model choice'})
+        
+        model.fit(X_train, y_train)
+        
+        # 예측 진행
+        pred = model.predict(StandardScaler().fit_transform(data))
+        result = int(pred[0])
+
+        # 예측 결과를 csv 파일에 추가로 저장
+        df.loc[len(df) - 1, 'Divorce'] = result
+        df.to_csv(file_path, index=False, sep=';')
+
+        return JsonResponse({'prediction':result})
+    return render(request, 'divorce/ai_jjw_lea')
+        
 # 이혼 확률 데이터 전처리
 def divorce_data_preprocessing():
     df_divorce = pd.read_csv(r'C:\Users\user\Desktop\machine_learing\ai_project\static\file\ai_data\ai_khm\divorce_data.csv', sep=';')
@@ -87,8 +128,8 @@ def divorce_data_preprocessing():
     df_data = df_divorce.drop(['Divorce'], axis=1)
     df_target = df_divorce['Divorce']
      
-    print('데이터: ', df_data)
-    print('타겟: ', df_target.tail())
+    # print('데이터: ', df_data)
+    # print('타겟: ', df_target.tail())
 
     return df_data, df_target
 
@@ -97,24 +138,6 @@ def decision_tree_view(request):
 
     data_scaled = StandardScaler().fit_transform(df_data)
     X_train, X_test, y_train, y_test = train_test_split(data_scaled, df_target, test_size=0.3, random_state=62)
-    
-    # xgb = XGBClassifier(n_estimators=500, learning_rate=0.1, max_depth=3)
-    # xgb.set_params(early_stopping_rounds=100, eval_metric='logloss')
-
-    # # eval_set을 통해 조기 종료를 설정
-    # xgb.fit(X_train, y_train, verbose=True, eval_set=[(X_test, y_test)])
-
-    # pred = xgb.predict(X_test)
-
-    # param = {
-    #     'max_depth':range(1,10,1),
-    #     'subsample' : [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
-    # }
-
-    # grid_cv = GridSearchCV(XGBClassifier(), param_grid=param, scoring='accuracy', cv=2, verbose=1, n_jobs=-1)
-    # grid_cv.fit(X_train, y_train)
-    # print('최적 파라미터 : ', grid_cv.best_params_)
-    # print('최고 예측 정확도 : ', grid_cv.best_score_)
 
     lr_clf = LogisticRegression()
     lr_clf.fit(X_train, y_train)
@@ -139,4 +162,31 @@ def decision_tree_view(request):
     return render(request, 'divorce/ai_jjw/decision_tree.html', content)
 
 def svm_view(request):
+    df_data, df_target = divorce_data_preprocessing()
+
+    data_scaled = StandardScaler().fit_transform(df_data)
+    X_train, X_test, y_train, y_test = train_test_split(data_scaled, df_target, test_size=0.3, random_state=62)
+    
+    xgb = XGBClassifier(n_estimators=500, learning_rate=0.1, max_depth=3)
+    xgb.set_params(early_stopping_rounds=100, eval_metric='logloss')
+
+    # eval_set을 통해 조기 종료를 설정
+    xgb.fit(X_train, y_train, verbose=True, eval_set=[(X_test, y_test)])
+
+    pred = xgb.predict(X_test)
+
+    param = {
+        'max_depth':range(1,10,1),
+        'subsample' : [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
+    }
+
+    grid_cv = GridSearchCV(XGBClassifier(), param_grid=param, scoring='accuracy', cv=2, verbose=1, n_jobs=-1)
+    grid_cv.fit(X_train, y_train)
+    print('최적 파라미터 : ', grid_cv.best_params_)
+    print('최고 예측 정확도 : ', grid_cv.best_score_)
+
+    content = {
+        "accuracy_score": accuracy_score(y_test, pred),
+        "hyper_param": grid_cv.get_params()
+    }
     return render(request, 'divorce/ai_jjw/svm.html')
