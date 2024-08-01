@@ -1,11 +1,9 @@
 from django.shortcuts import render
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
 from xgboost import XGBClassifier
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LogisticRegression
 import numpy as np
@@ -72,7 +70,6 @@ def learning(request):
         "배우자의 부족한 부분에 대해 주저하지 않고 말한다",
         "나는 논의할 때 배우자의 부족한 부분을 상기시킨다",
         "배우자에게 배우자의 무능한 부분에 대해 말할 때 두려워 하지 않는다",
-        "이혼 결과"
     ]
     
     content = {
@@ -84,18 +81,30 @@ def learning(request):
 
 def analyze_divorce(request) :
     if request.method == 'POST' :
-        scores = [float(request.POST.get(f'score_{i}')) for i in range(1,55)]
+        # 사용자가 입력한 점수 데이터 가져오기
+        scores = []
+        for i in range(1,55) :
+            score = request.POST.get(f'score_{i}')
+            if score is None or score == '':
+                return JsonResponse({'error': f'Score {i} is missing or invalid'})
+            scores.append(float(score))
         data = np.array(scores).reshape(1,-1)
 
+        # 원본 데이터 불러오기
         file_path = r'C:\Users\user\Desktop\machine_learing\ai_project\static\file\ai_data\ai_khm\divorce_data.csv'
         df = pd.read_csv(file_path, sep=';')
         save = scores + [None] # 이혼 결과를 저장할 자리 비우기, None은 추후 Divorce가 들어갈 자리다
         df.loc[len(df)] = save
         df.to_csv(file_path, index=False, sep=';')
 
+        # 데이터 전처리
         df_data = df.drop(['Divorce'], axis=1)
         df_target = df['Divorce']
 
+        # NaN 값을 제거하거나 대체
+        df_data = df_data.fillna(0)  # NaN 값을 0으로 대체하거나 다른 값으로 대체할 수 있습니다.
+        df_target = df_target.fillna(0)  # NaN 값을 0으로 대체
+        
         data_scaled = StandardScaler().fit_transform(df_data)
         X_train, X_test, y_train, y_test = train_test_split(data_scaled, df_target, test_size=0.3, random_state=62)
 
@@ -103,8 +112,10 @@ def analyze_divorce(request) :
 
         if model_choice == 'logistic' :
             model = LogisticRegression()
+            model.fit(X_train, y_train)
         elif model_choice == 'xgboost' :
             model = XGBClassifier(n_estimators=500, learning_rate=0.1, max_depth=3)
+            model.fit(X_train, y_train)
         else :
             return JsonResponse({'error' : 'Invalid model choice'})
         
@@ -118,8 +129,14 @@ def analyze_divorce(request) :
         df.loc[len(df) - 1, 'Divorce'] = result
         df.to_csv(file_path, index=False, sep=';')
 
-        return JsonResponse({'prediction':result})
-    return render(request, 'divorce/ai_jjw_lea')
+        # 예측 결과와 모델 정확도를 출력 페이지로 전달
+        accuracy = accuracy_score(y_test, model.predict(X_test))
+        
+        if model_choice == 'logistic':
+            return render(request, 'divorce/ai_jjw/decision_tree.html', {'accuracy_score': accuracy, 'result': result})
+        elif model_choice == 'xgboost':
+            return render(request, 'divorce/ai_jjw/svm.html', {'accuracy_score': accuracy, 'result': result})
+    return render(request, 'divorce/ai_jjw/learning.html')
         
 # 이혼 확률 데이터 전처리
 def divorce_data_preprocessing():
@@ -156,7 +173,10 @@ def decision_tree_view(request):
 
     content = {
         "accuracy_score": accuracy_score(y_test, pred),
-        "hyper_param": lr_clf.get_params()
+        "hyper_param": lr_clf.get_params(),
+        # data, target 값을 여기에 추가
+        "data" : df_data,
+        "target" : df_target
     }
 
     return render(request, 'divorce/ai_jjw/decision_tree.html', content)

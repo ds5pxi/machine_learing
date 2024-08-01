@@ -21,42 +21,33 @@
 <div class="container col-md-10">
     <h1 class="my-5">이혼 확률 데이터</h1>
 
-    <div class="card mb-5">
-        <div class="card-header">
-            컬럼에 대한 설명
+    <form method="POST" action="{% url 'ai_jjw:analyze_divorce' %}">
+        {% csrf_token %}
+        <div class="card mb-5">
+            <div class="card-header">
+                컬럼에 대한 설명
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    {% for col_nm in col_list %}
+                        <dt class="col-sm-1">Q{{forloop.counter}}</dt>
+                        <dd class="col-sm-11">{{col_nm}}<input type="number" name="score_{{forloop.counter}}" oninput="validateInput(event)"></dd>
+                        <!-- validateInput 함수가 oninput 이벤트로 연결 -->
+                    {% endfor %}
+                </dl>
+            </div>
         </div>
-        <div class="card-body">
-            <dl class="row">
-             {% for col_nm in col_list %}
-               {% if forloop.counter == 55 %}
-                <dt class="col-sm-1">Divorce</dt>
-               {% else %}
-                <dt class="col-sm-1">Q{{forloop.counter}}</dt>
-               {% endif %}
-                <dd class="col-sm-11">{{col_nm}}<input type="number" name="score_{{forloop.counter}}" oninput="validationInput(event)"></dd>
-                <!-- validateInput 함수가 oninput 이벤트로 연결 -->
-             {% endfor %}
-            </dl>
-            
-        </div>
-    </div>
     
-    {{df_dvc_html|safe}}
+        {{df_dvc_html|safe}}
 
-    <div class="form-group">
-        <label for="model_choice">모델 선택:</label>
-        <select name="model_choice" id="model_choice" class="form-control">
-            <option value="logistic">로지스틱 회귀</option>
-            <option value="xgboost">XGBoost</option>
-        </select>
-    </div>
-
-    <h2 class="mt-5 mb-4">결정 트리 모델 테스트</h2>
-
-    <button type="button" class="btn btn-primary btn-lg" onclick="execDT();">실행</button>
-
-    <h2 class="my-4">SVM 모델 테스트</h2>
-
-    <button type="button" class="btn btn-primary btn-lg" onclick="execSVM();">실행</button>
+        <div class="form-group">
+            <label for="model_choice">모델 선택:</label>
+            <select name="model_choice" id="model_choice" class="form-control">
+                <option value="logistic">로지스틱 회귀</option>
+                <option value="xgboost">XGBoost</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">예측 실행</button>
+    </form>
 </div>
 {% endblock %}

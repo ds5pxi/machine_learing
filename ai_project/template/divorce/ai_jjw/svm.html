@@ -1,0 +1,25 @@
+{% extends 'templates.html' %}
+
+{% block title %}테스터 정진우 SVM 결과 사이트{% endblock %}
+
+{% load static %}
+
+{% block script %}
+<script src="{% static 'js/divorce/ai_jjw/svm.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container col-md-10" style="height: 52rem;">
+    <h1 class="my-5">의사결정트리 이혼 확률 결과</h1>
+
+    <h4>정확도</h4>
+
+    <p>{{accuracy_score}}</p>
+
+    <h4 class="my-4">예측 결과</h4>
+ 
+    <p>{{result}}</p>
+
+    <button type="button" class="btn btn-secondary btn-lg mt-5" onclick="returnLearning();">이혼률 확률 분석 사이트로 돌아가기</button>
+</div>
+{% endblock %}
