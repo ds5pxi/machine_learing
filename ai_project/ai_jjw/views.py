@@ -8,6 +8,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LogisticRegression
 import numpy as np
 from django.http import JsonResponse
+from sklearn.utils import shuffle
 
 # Create your views here.
 def learning(request):
@@ -90,9 +91,20 @@ def analyze_divorce(request) :
             scores.append(float(score))
         data = np.array(scores).reshape(1,-1)
 
+        # 디버깅 정보 출력
+        print("Input scores:", scores)
+        print("Input data array:", data)
+
         # 원본 데이터 불러오기
         file_path = r'C:\Users\user\Desktop\machine_learing\ai_project\static\file\ai_data\ai_khm\divorce_data.csv'
         df = pd.read_csv(file_path, sep=';')
+
+        # 데이터 섞기
+        df = shuffle(df, random_state=62)
+        # 데이터 저장 (원본 파일을 덮어쓰지 않도록 새로운 파일명 사용)
+        file_path_shuffled = r'C:\Users\user\Desktop\machine_learing\ai_project\static\file\ai_data\ai_khm\divorce_data_shuffled.csv'
+        df.to_csv(file_path_shuffled, index=False, sep=';')
+
         save = scores + [None] # 이혼 결과를 저장할 자리 비우기, None은 추후 Divorce가 들어갈 자리다
         df.loc[len(df)] = save
         df.to_csv(file_path, index=False, sep=';')
@@ -104,8 +116,10 @@ def analyze_divorce(request) :
         # NaN 값을 제거하거나 대체
         df_data = df_data.fillna(0)  # NaN 값을 0으로 대체하거나 다른 값으로 대체할 수 있습니다.
         df_target = df_target.fillna(0)  # NaN 값을 0으로 대체
-        
-        data_scaled = StandardScaler().fit_transform(df_data)
+
+        scaler = StandardScaler()
+        data_scaled = scaler.fit_transform(df_data)
+
         X_train, X_test, y_train, y_test = train_test_split(data_scaled, df_target, test_size=0.3, random_state=62)
 
         model_choice = request.POST.get('model_choice')
@@ -119,10 +133,10 @@ def analyze_divorce(request) :
         else :
             return JsonResponse({'error' : 'Invalid model choice'})
         
-        model.fit(X_train, y_train)
+        # 예측 수행
+        data_scaled_input = scaler.transform(data)
         
-        # 예측 진행
-        pred = model.predict(StandardScaler().fit_transform(data))
+        pred = model.predict(data_scaled_input)
         result = int(pred[0])
 
         # 예측 결과를 csv 파일에 추가로 저장
@@ -131,11 +145,12 @@ def analyze_divorce(request) :
 
         # 예측 결과와 모델 정확도를 출력 페이지로 전달
         accuracy = accuracy_score(y_test, model.predict(X_test))
-        
+
         if model_choice == 'logistic':
             return render(request, 'divorce/ai_jjw/decision_tree.html', {'accuracy_score': accuracy, 'result': result})
         elif model_choice == 'xgboost':
             return render(request, 'divorce/ai_jjw/svm.html', {'accuracy_score': accuracy, 'result': result})
+
     return render(request, 'divorce/ai_jjw/learning.html')
         
 # 이혼 확률 데이터 전처리
