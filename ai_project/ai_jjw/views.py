@@ -90,11 +90,7 @@ def analyze_divorce(request) :
                 return JsonResponse({'error': f'Score {i} is missing or invalid'})
             scores.append(float(score))
         data = np.array(scores).reshape(1,-1)
-
-        # 디버깅 정보 출력
-        print("Input scores:", scores)
-        print("Input data array:", data)
-
+        
         # 원본 데이터 불러오기
         file_path = r'C:\Users\user\Desktop\machine_learing\ai_project\static\file\ai_data\ai_khm\divorce_data.csv'
         df = pd.read_csv(file_path, sep=';')
