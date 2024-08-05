@@ -1,6 +1,6 @@
 {% extends 'templates.html' %}
 
-{% block title %}테스터 김현민 SVM 결과 사이트{% endblock %}
+{% block title %}테스터 김현민 SVM 전 산포도 사이트{% endblock %}
 
 {% load static %}
 
@@ -11,17 +11,11 @@
 
 {% block content %}
 <div class="container col-md-10">
-    <h1 class="my-5">SVM 모델 이혼 확률 결과</h1>
+    <h1 class="my-5">SVM 산포도</h1>
+    
+    <img src="data:image/png;base64, {{svm_scatter|safe}}" alt="SVM 산포도 그래프">
 
-    <h4>선형 분류 점수</h4>
-
-    <p>{{svm_linear_score}}</p>
-
-    <h4 class="my-4">비선형 분류 점수</h4>
-
-    <p>{{svm_rbf_score}}</p>
-
-    <button type="button" class="btn btn-primary btn-lg mt-5" onclick="svmCrossValidation();">SVM 모델 교차 검증</button>
+    <button type="button" class="btn btn-primary btn-lg mt-5" onclick="svmResult();">SVM 모델 이혼 확률 결과 보기</button>
 
     <button type="button" class="btn btn-secondary btn-lg mt-5" onclick="returnLearning();">이혼 확률 분석 사이트로 돌아가기</button>
 </div>

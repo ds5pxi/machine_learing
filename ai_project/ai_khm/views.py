@@ -1,14 +1,18 @@
 from django.shortcuts import render
 import pandas as pd
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score, cross_validate, GridSearchCV
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, roc_auc_score
 from main.views import korean
 import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
+import sklearn.svm as svm
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import VotingClassifier
+import numpy as np
 
 # Create your views here.
 def learning(request):
@@ -89,6 +93,35 @@ def divorce_data_preprocessing():
 
     return df_data, df_target
 
+# 최소값, 최대값, 증가값에서 증가값의 형에 따라 목록 값을 반환
+def return_list_type_of_add_val(prm_min_val, prm_max_val, prm_add_val, prm_point):
+    if prm_add_val.find(".") != -1:
+        min_val = float(prm_min_val)
+        max_val = float(prm_max_val)
+        add_val = float(prm_add_val)
+
+        point = int(prm_point)       # 소수점 아래 반올림 수
+
+        var = min_val
+
+        prm_list = []
+
+        while var <= max_val:
+            var = round(var, point)
+            print("변수 값: ", var)
+
+            prm_list.append(var)
+
+            var = var + add_val
+    else:
+        min_val = int(prm_min_val)
+        max_val = int(prm_max_val)
+        add_val = int(prm_add_val)
+
+        prm_list = range(min_val, max_val, add_val)
+
+    return prm_list
+
 # 의사결정트리 모델 
 def decision_tree_view(request):
     df_data, df_target = divorce_data_preprocessing()
@@ -115,6 +148,33 @@ def get_knn_best_params(n_neighbor_list, X_train, y_train):
     }
 
     grid_cv = GridSearchCV(KNeighborsClassifier(), param_grid=params, scoring='accuracy', cv=5)
+    grid_cv.fit(X_train, y_train)
+
+    return grid_cv.best_score_, grid_cv.best_params_
+
+# svm 최적의 파라미터 찾는 메서드(선형 모델 분류)
+def get_svm_linear_best_params(cost_list, clf, X_train, y_train):
+    params = {
+        'C': cost_list
+    }
+
+    grid_cv = GridSearchCV(clf, param_grid=params, scoring='accuracy', cv=5, verbose=1)
+    grid_cv.fit(X_train, y_train)
+
+    return grid_cv.best_score_, grid_cv.best_params_
+
+# voting 최적의 파라미터 찾는 메서드(의사결정트리, knn 모델, 로지스틱 회귀)
+def get_voting_best_params(cost_list, n_neighbors_list, n_depth_list, n_split_list, vo, X_train, y_train):
+    params = {
+        'lr__C': cost_list,
+        'knn__n_neighbors': n_neighbors_list,
+        'knn__weights': ['uniform', 'distance'],
+        'knn__metric': ['euclidean', 'manhattan', 'minkowski'],
+        'dt__max_depth': n_depth_list,
+        'dt__min_samples_split': n_split_list
+    }
+
+    grid_cv = GridSearchCV(vo, param_grid=params, scoring='accuracy', cv=5)
     grid_cv.fit(X_train, y_train)
 
     return grid_cv.best_score_, grid_cv.best_params_
@@ -221,6 +281,223 @@ def knn_opt_prms_result(request):
 
         return render(request, 'divorce/ai_khm/knn_opt_prms_result.html', content)
 
+# svm 산포도
+def svm_scatter(request):
+    df_data, df_target = divorce_data_preprocessing()
 
+    plt.switch_backend('AGG')
+    plt.scatter(df_data["Sorry_end"], df_data["Ignore_diff"], c=df_target)
+
+    graph = comm_graph_setting()
+
+    content = {
+        "svm_scatter": graph
+    }
+
+    return render(request, 'divorce/ai_khm/svm_scatter.html', content)
+
+# svm 모델
 def svm_view(request):
-    return render(request, 'divorce/ai_khm/svm.html')
+    df_data, df_target = divorce_data_preprocessing()
+
+    X_train, X_test, y_train, y_test = train_test_split(df_data, df_target, test_size=0.3, random_state=62)
+
+    global svm_linear_clf, svm_rbf_clf, svm_data, svm_labels, svm_X_train, svm_X_test, svm_y_train, svm_y_test
+    # 다른 메서드에서 사용을 위해 전역변수에 대입
+    svm_data = df_data
+    svm_labels = df_target
+    svm_X_train = X_train
+    svm_X_test = X_test
+    svm_y_train = y_train
+    svm_y_test = y_test
+    svm_linear_clf = svm.SVC(kernel='linear')
+    svm_linear_clf.fit(X_train, y_train)
+
+    svm_rbf_clf = svm.SVC(kernel='rbf')
+    svm_rbf_clf.fit(X_train, y_train)
+
+    content = {
+        "svm_linear_score": svm_linear_clf.score(X_test, y_test),
+        "svm_rbf_score": svm_rbf_clf.score(X_test, y_test)
+    }
+
+    return render(request, 'divorce/ai_khm/svm.html', content)
+
+# svm 교차 검증
+def svm_cv(request):
+    scores = cross_val_score(svm_linear_clf, svm_data, svm_labels, cv=5)
+    df_svm_cv = pd.DataFrame(cross_validate(svm_linear_clf, svm_data, svm_labels, cv=5))
+    df_svm_cv_html = df_svm_cv.to_html(classes='table table-bordered')
+    
+    svm_best_score, svm_best_params = get_svm_linear_best_params([0.001, 0.01, 0.1, 1, 10, 25, 50, 100], svm_linear_clf, svm_X_train, svm_y_train)
+
+    content = {
+        "svm_cv_mean": scores.mean(),
+        "df_svm_cv_html": df_svm_cv_html,
+        "svm_best_score": svm_best_score,
+        "svm_best_params": svm_best_params
+    }
+
+    return render(request, 'divorce/ai_khm/svm_cv.html', content)
+
+def svm_test_params(request):
+    if request.method == "GET":
+        return render(request, 'divorce/ai_khm/svm_test_params.html')
+    elif request.method == "POST":
+        # 증가 값에 소수점 포함 시 최소 값, 최대 값, 증가 값 모두 실수화, 아니면 정수화
+        cost_list = return_list_type_of_add_val(request.POST['svmMinVal'], request.POST['svmMaxVal'], request.POST['svmAddVal'], request.POST['svmPoint'])
+
+        svm_best_score, svm_best_params = get_svm_linear_best_params(cost_list, svm_linear_clf, svm_X_train, svm_y_train)
+
+        content = {
+            "svm_best_score": svm_best_score,
+            "svm_best_params": svm_best_params
+        }
+
+        return render(request, 'divorce/ai_khm/svm_test_params.html', content)
+    
+# SVM 최적화된 파라미터 입력 후 결과
+def svm_opt_prms_result(request):
+    if request.method == "GET":
+        return render(request, 'divorce/ai_khm/svm_opt_prms_result.html')
+    elif request.method == "POST":
+        # C 값에 소수점 포함 시 실수화, 아니면 정수화
+        str_svm_c_val = request.POST['svmC']
+        svm_kernel_val = request.POST['svmKernel']
+
+        if str_svm_c_val.find(".") != -1:
+            svm_c_val = float(str_svm_c_val)
+        else:
+            svm_c_val = int(str_svm_c_val)
+
+        svm_clf = svm.SVC(kernel=svm_kernel_val, C=svm_c_val)
+
+        svm_clf.fit(svm_X_train, svm_y_train)
+        
+        content = {
+            "svm_opt_score": svm_clf.score(svm_X_test, svm_y_test)
+        }
+
+        return render(request, 'divorce/ai_khm/svm_opt_prms_result.html', content)
+    
+# 로지스틱 회귀 모델
+def logistic_regression_view(request):
+    df_data, df_target = divorce_data_preprocessing()
+
+    standard_scaled = StandardScaler().fit_transform(df_data)
+
+    X_train, X_test, y_train, y_test = train_test_split(standard_scaled, df_target, test_size=0.3, random_state=10)
+
+    lr = LogisticRegression()
+    lr.fit(X_train, y_train)
+    pred = lr.predict(X_test)
+
+    df_lr_coef = pd.DataFrame(lr.coef_, columns=df_data.columns)
+
+    content = {
+        "lr_score": lr.score(X_test, y_test),
+        "lr_acc_score": accuracy_score(y_test, pred),
+        "lr_roc_auc_score": roc_auc_score(y_test, pred),
+        "df_lr_coef": df_lr_coef.to_html(index=False, classes="table table-bordered")
+    }
+
+    return render(request, 'divorce/ai_khm/logistic_regression.html', content)
+
+# 보팅 분류기
+def voting_view(request):
+    df_data, df_target = divorce_data_preprocessing()
+
+    X_train, X_test, y_train, y_test = train_test_split(df_data, df_target, test_size=0.2, random_state=10)
+
+    lr = LogisticRegression(max_iter=4000)
+    knn = KNeighborsClassifier()
+    dt = DecisionTreeClassifier()
+
+    soft_vo = VotingClassifier([('lr', lr), ('knn', knn), ('dt', dt)], voting='soft')
+    soft_vo.fit(X_train, y_train)
+    soft_pred = soft_vo.predict(X_test)
+
+    hard_vo = VotingClassifier([('lr', lr), ('knn', knn), ('dt', dt)], voting='hard')
+    hard_vo.fit(X_train, y_train)
+    hard_pred = hard_vo.predict(X_test)
+
+    model_acc_list = []
+
+    for model in [lr, knn, dt]:
+        model_name = model.__class__.__name__
+        model.fit(X_train, y_train)
+        model_pred = model.predict(X_test)
+
+        acc = accuracy_score(y_test, model_pred)
+
+        model_acc_list.append(f'{model_name} 의 정확도: {acc}')
+
+    standard_scaler = StandardScaler()
+    standard_scaler.fit(X_train)
+    X_train_std = standard_scaler.transform(X_train)
+    X_test_std = standard_scaler.transform(X_test)
+
+    global voting_soft_vo, voting_X_train_std, voting_X_test_std, voting_y_train, voting_y_test
+    # 다른 메서드에서 사용을 위해 전역변수에 대입
+    voting_soft_vo = soft_vo
+    voting_X_train_std = X_train_std
+    voting_X_test_std = X_test_std
+    voting_y_train = y_train
+    voting_y_test = y_test
+
+    soft_vo.fit(X_train_std, y_train)
+    standard_pred = soft_vo.predict(X_test_std)
+
+    voting_cv_list = []
+
+    for model in [soft_vo, lr, knn, dt]:
+        scores = cross_val_score(model, np.concatenate((X_train_std, X_test_std)), np.concatenate((y_train, y_test)), scoring='accuracy', cv=5)
+
+        voting_cv_list.append(f'모델: {model.__class__.__name__}')
+        voting_cv_list.append('전체 정확도')
+        voting_cv_list.append(scores)
+        voting_cv_list.append(f'평균 정확도: {np.mean(scores)}')
+        voting_cv_list.append('=' * 30)
+
+    cost_list = [0.001, 0.01, 0.1, 1, 10]
+    n_neighbors_list = range(1, 100, 10)
+    n_depth_list = range(1, 21, 10)
+    n_split_list = range(2, 50, 10)
+
+    voting_best_score, voting_best_params = get_voting_best_params(cost_list, n_neighbors_list, n_depth_list, n_split_list, soft_vo, X_train_std, y_train)
+
+    content = {
+        "soft_voting_acc_score": accuracy_score(y_test, soft_pred),
+        "hard_voting_acc_score": accuracy_score(y_test, hard_pred),
+        "standard_soft_voting_acc_score": accuracy_score(y_test, standard_pred),
+        "model_acc_list": model_acc_list,
+        "voting_cv_list": voting_cv_list,
+        "voting_best_score": voting_best_score,
+        "voting_best_params": voting_best_params
+    }
+
+    return render(request, 'divorce/ai_khm/voting.html', content)
+
+# 보팅 최적의 파라미터
+def voting_test_params(request):
+    if request.method == "GET":
+        return render(request, 'divorce/ai_khm/voting_test_params.html')
+    elif request.method == "POST":
+        # 증가 값에 소수점 포함 시 최소 값, 최대 값, 증가 값 모두 실수화, 아니면 정수화
+        cost_list = return_list_type_of_add_val(request.POST['votingCMinVal'], request.POST['votingCMaxVal'], request.POST['votingCAddVal'], request.POST['votingCPoint'])
+        n_neighbors_list = return_list_type_of_add_val(request.POST['votingNeighborsMinVal'], request.POST['votingNeighborsMaxVal'], request.POST['votingNeighborsAddVal'], request.POST['votingNeighborsPoint'])
+        n_depth_list = return_list_type_of_add_val(request.POST['votingMaxDepthMinVal'], request.POST['votingMaxDepthMaxVal'], request.POST['votingMaxDepthAddVal'], request.POST['votingMaxDepthPoint'])
+        n_split_list = return_list_type_of_add_val(request.POST['votingMinSamplesSplMinVal'], request.POST['votingMinSamplesSplMaxVal'], request.POST['votingMinSamplesSplAddVal'], request.POST['votingMinSamplesSplPoint'])
+
+        voting_best_score, voting_best_params = get_voting_best_params(cost_list, n_neighbors_list, n_depth_list, n_split_list, voting_soft_vo, voting_X_train_std, voting_y_train)
+
+        content = {
+            "voting_best_score": voting_best_score,
+            "voting_best_params": voting_best_params
+        }
+
+        return render(request, 'divorce/ai_khm/voting_test_params.html', content)
+    
+# 음식 추천 시스템
+def foods_learning(request):
+    return render(request, 'foods/ai_khm/learning.html')

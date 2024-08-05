@@ -1,0 +1,44 @@
+{% extends 'templates.html' %}
+
+{% block title %}테스터 김현민 SVM 최고의 파라미터 결과 사이트{% endblock %}
+
+{% load static %}
+
+{% block script %}
+<script src="{% static 'js/divorce/ai_khm/comm.js' %}"></script>
+<script src="{% static 'js/divorce/ai_khm/svm.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container col-md-10">
+    <h1 class="my-5">SVM 모델 이혼 확률 최고의 파라미터 테스트 결과</h1>
+
+    <h4>최고 점수</h4>
+
+    <p>{{svm_best_score}}</p>
+
+    <h4 class="my-4">최고 파라미터</h4>
+
+    <p>{{svm_best_params}}</p>
+
+    <h4 class="my-4">SVM 모델 최적화된 파라미터 입력</h4>
+
+    <form class="row row-cols-lg-auto g-3 align-items-center" method="post" action="{% url 'ai_khm:svm_opt_prms_result' %}" name="svmOptPrmsForm">{% csrf_token %}
+        <div class="col-12">
+            <label for="svmKernel" class="form-label">kernel</label>
+
+            <input type="text" class="form-control" id="svmKernel" name="svmKernel" value="linear" readonly>
+        </div>
+        <div class="col-12">
+            <label for="svmC" class="form-label">C</label>
+
+            <input type="text" class="form-control" id="svmC" name="svmC" oninput="onlyInputNumberAndDot(this);">
+        </div>
+        <div class="col-12">
+            <button type="button" class="btn btn-primary" onclick="svmOptParamsTest();">최적의 파라미터 입력 결과보기</button>
+        </div>
+    </form>
+
+    <button type="button" class="btn btn-secondary btn-lg mt-5" onclick="returnLearning();">이혼 확률 분석 사이트로 돌아가기</button>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'templates.html' %}
+
+{% block title %}테스터 김현민 SVM 교차검증 사이트{% endblock %}
+
+{% load static %}
+
+{% block script %}
+<script src="{% static 'js/divorce/ai_khm/comm.js' %}"></script>
+<script src="{% static 'js/divorce/ai_khm/svm.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container col-md-10">
+    <h1 class="my-5">SVM 교차검증</h1>
+
+    <h4>교차 검증 평균</h4>
+
+    <p>{{svm_cv_mean}}</p>
+
+    <h4 class="my-4">교차 검증 표</h4>
+
+    <p>{{df_svm_cv_html|safe}}</p>
+
+    <h4 class="my-4">최고 점수</h4>
+
+    <p>{{svm_best_score}}</p>
+
+    <h4 class="my-4">최고 파라미터</h4>
+
+    <p>{{svm_best_params}}</p>
+
+    <h4 class="my-4">k-neighbors 파라미터 입력</h4>
+
+    <form class="row row-cols-lg-auto g-3 align-items-center" method="post" action="{% url 'ai_khm:svm_test_params' %}" name="svmTestForm">{% csrf_token %}
+        <div class="col-12">
+            <label for="svmMinVal" class="form-label">파라미터 최소값</label>
+
+            <input type="text" class="form-control" id="svmMinVal" name="svmMinVal" oninput="onlyInputNumberAndDot(this);">
+        </div>
+        <div class="col-12">
+            <label for="svmMaxVal" class="form-label">파라미터 최대값</label>
+
+            <input type="text" class="form-control" id="svmMaxVal" name="svmMaxVal" oninput="onlyInputNumberAndDot(this);">
+        </div>
+        <div class="col-12">
+            <label for="svmAddVal" class="form-label">파라미터 증가값</label>
+
+            <input type="text" class="form-control" id="svmAddVal" name="svmAddVal" oninput="onlyInputNumberAndDot(this);">
+        </div>
+        <div class="col-12">
+            <label for="svmPoint" class="form-label">소수점 아래 최대 자리수(정수는 입력 불필요)</label>
+
+            <input type="text" class="form-control" id="svmPoint" name="svmPoint" oninput="onlyInputNumber(this);">
+        </div>
+        <div class="col-12">
+            <button type="button" class="btn btn-primary" onclick="svmParamsTest();">최적 파라미터 테스트</button>
+        </div>
+    </form>
+
+    <button type="button" class="btn btn-secondary btn-lg mt-5" onclick="returnLearning();">이혼 확률 분석 사이트로 돌아가기</button>
+</div>
+{% endblock %}
