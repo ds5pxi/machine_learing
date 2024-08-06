@@ -1,9 +1,27 @@
 {% extends 'templates.html' %}
 
-{% block title %}테스터 정진우 이혼률 확률 분석 사이트{% endblock %}
+{% block title %}테스터 정진우 음식 분석 사이트{% endblock %}
 
 {% load static %}
 
 {% block content %}
+<script src="{% static 'js/foods/main/survey.js' %}"></script>
+{% endblock %}
 
+{% block content %}
+<div class="container col-md-10" style="height: 52rem;">
+    <h1 class="my-5">의사결정트리 이혼 확률 결과</h1>
+
+    <h4>정확도</h4>
+
+    <p>{{accuracy_score}}</p>
+
+    <h4 class="my-4">하이퍼 파라미터</h4>
+
+    <p>{{hyper_param}}</p>
+
+    <h4 class="my-4">추천음식</h4>
+    
+    <p>{{target}}</p>
+</div>
 {% endblock %}
