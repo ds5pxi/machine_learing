@@ -5,7 +5,7 @@
 {% load static %}
 
 {% block script %}
-<script src="{% static 'js/divorce/ai_khm/decision_tree.js' %}"></script>
+<script src="{% static 'js/divorce/ai_khm/comm.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -20,6 +20,6 @@
 
     <p>{{hyper_param}}</p>
 
-    <button type="button" class="btn btn-secondary btn-lg mt-5" onclick="returnLearning();">이혼률 확률 분석 사이트로 돌아가기</button>
+    <button type="button" class="btn btn-secondary btn-lg mt-5" onclick="returnLearning();">이혼 확률 분석 사이트로 돌아가기</button>
 </div>
 {% endblock %}

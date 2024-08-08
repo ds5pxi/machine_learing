@@ -1,0 +1,25 @@
+{% extends 'templates.html' %}
+
+{% block title %}테스터 김현민 보팅 분류기 최고의 파라미터 결과 사이트{% endblock %}
+
+{% load static %}
+
+{% block script %}
+<script src="{% static 'js/divorce/ai_khm/comm.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container col-md-10">
+    <h1 class="my-5">보팅 분류기 이혼 확률 결과</h1>
+
+    <h4>최고 점수</h4>
+
+    <p>{{voting_best_score}}</p>
+
+    <h4 class="my-4">최고 파라미터</h4>
+
+    <p>{{voting_best_params}}</p>
+
+    <button type="button" class="btn btn-secondary btn-lg mt-5" onclick="returnLearning();">이혼 확률 분석 사이트로 돌아가기</button>
+</div>
+{% endblock %}
