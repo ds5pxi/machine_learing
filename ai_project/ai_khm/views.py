@@ -498,6 +498,100 @@ def voting_test_params(request):
 
         return render(request, 'divorce/ai_khm/voting_test_params.html', content)
     
+# 음식 데이터 전처리
+def food_data_preprocessing():
+    df_raw_foods = pd.read_excel('D:/machine_learing/ai_project/static/file/ai_data/ai_khm/food_data_extend.xlsx')
+
+    df_foods = df_raw_foods.drop(columns=['menu'])
+    df_labels = df_raw_foods['menu']
+
+    return df_foods, df_labels
+    
 # 음식 추천 시스템
 def foods_learning(request):
     return render(request, 'foods/ai_khm/learning.html')
+
+# 음식 결과 시스템
+def foods_result(request):
+    food_dict = {
+        1: "냉면(물, 비빔, 평양, 함흥 등)",
+        2: "국수(잔치, 비빔, 쌀)",
+        3: "국밥(설렁탕, 육개장, 수육 등)",
+        4: "덮밥(제육덮밥, 불고기덮밥 등)",
+        5: "볶음류(오징어볶음, 김치볶음밥, 철판볶음 등)",
+        6: "찌개(김치찌개, 된장찌개, 순두부찌개 등)",
+        7: "삼계탕",
+        8: "비빔밥(돌솥비빔밥, 산채비빔밥 등)",
+        9: "감자탕 또는 뼈해장국",
+        10: "마라탕",
+        11: "짜장 또는 짬뽕",
+        12: "초밥",
+        13: "우동",
+        14: "떡볶이 또는 순대 또는 튀김",
+        15: "라면 또는 김밥",
+        16: "돈까스",
+        17: "샌드위치 또는 샐러드",
+        18: "햄버거",
+        19: "피자",
+        20: "스테이크 또는 파스타(스파게티)",
+        21: "컵밥 또는 도시락",
+        22: "삼겹살 또는 소고기 또는 양꼬치",
+        23: "치킨",
+        24: "족발",
+        25: "회(물회) 또는 생선구이(고등어구이, 임연수 구이 등)",
+        26: "뷔페(점심뷔페 등) 또는 백반"
+    }
+
+    food_img_list = [
+        "naengmyeon.jpg",
+        "noodles.jpg",
+        "gukbap.jpg",
+        "rice.jpg",
+        "stir-fry.jpg",
+        "stew.png",
+        "samgyetang.jpg",
+        "bibimbap.jpg",
+        "back-bone-stew.jpg",
+        "malatang.jpg",
+        "black-bean-sauce-noodles.jpg",
+        "sushi.jpg",
+        "udon-noodles.jpg",
+        "tteokbokki.jpg",
+        "ramen.jpg",
+        "pork-cutlet.jpg",
+        "sandwich.jpg",
+        "burger.jpg",
+        "pizza.jpg",
+        "steak.jpg",
+        "korean-lunch-box.jpg",
+        "pork-belly.jpg",
+        "chicken.jpg",
+        "pork-feet.jpg",
+        "raw-fish.jpg",
+        "buffet.jpg"
+    ]
+    
+    df_foods, df_labels = food_data_preprocessing()
+
+    knn = KNeighborsClassifier(n_neighbors=3)
+    knn.fit(df_foods, df_labels)
+
+    # X_test: 사용자 입력값
+    X_test = pd.DataFrame({
+        'emotion': [request.POST['emotion']],
+        'season': [request.POST['season']],
+        'weather': [request.POST['weather']],
+        'people': [request.POST['people']],
+        'price': [request.POST['price']],
+        'time': [request.POST['time']],
+        'sex': [request.POST['sex']]
+    })
+
+    pred = knn.predict(X_test)
+
+    content = {
+        "food_result": food_dict.get(pred[0]),
+        "food_picture": food_img_list[pred[0] - 1]
+    }
+
+    return render(request, 'foods/ai_khm/result.html', content)
