@@ -1,9 +1,298 @@
 {% extends 'templates.html' %}
 
-{% block title %}테스터 이지한 음식 추천 분석 사이트{% endblock %}
+{% block title %}Elegant Food Recommendation Analysis{% endblock %}
 
 {% load static %}
 
-{% block content %}
+{% block script %}
+<script src="{% static 'js/foods/ai_ljh/learning.js' %}"></script>
+<style>
+    body {
+        background-color: #f5f5f5;
+        font-family: 'Helvetica Neue', sans-serif;
+    }
 
+    .container {
+        background: white;
+        padding: 3rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin-top: 5rem;
+        position: relative;
+    }
+
+    h1 {
+        font-weight: 300;
+        color: #333;
+    }
+
+    .form-check-label {
+        font-size: 1.2rem;
+        color: #555;
+    }
+
+    .form-check-input:checked + .form-check-label {
+        color: #007bff;
+    }
+
+    .form-check-input:checked {
+        border-color: #007bff;
+        background-color: #007bff;
+    }
+
+    .question {
+        margin-bottom: 3rem;
+    }
+
+    .question h4 {
+        color: #007bff;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+
+    .question p {
+        font-size: 1rem;
+        color: #777;
+        margin-bottom: 1.5rem;
+    }
+
+    button {
+        font-size: 1.5rem;
+        padding: 1rem;
+        background-color: #007bff;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .emoji-pop {
+        position: absolute;
+        font-size: 3rem;
+        animation: pop 0.5s ease forwards;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    @keyframes pop {
+        0% {
+            transform: scale(0) translateY(20px);
+            opacity: 0;
+        }
+        60% {
+            transform: scale(1.2) translateY(-10px);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+    }
+</style>
+
+<script>
+    function showEmoji(emoji, targetElement) {
+        const emojiSpan = document.createElement('span');
+        emojiSpan.textContent = emoji;
+        emojiSpan.classList.add('emoji-pop');
+
+        const rect = targetElement.getBoundingClientRect();
+        emojiSpan.style.left = rect.left + window.pageXOffset + 'px';
+        emojiSpan.style.top = rect.top + window.pageYOffset + 'px';
+
+        document.body.appendChild(emojiSpan);
+
+        setTimeout(() => {
+            emojiSpan.remove();
+        }, 800);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.form-check-input').forEach(input => {
+            input.addEventListener('change', (event) => {
+                const emojiMap = {
+                    'k-emotion1': '😚',
+                    'k-emotion2': '😢',
+                    'k-emotion3': '😡',
+                    'k-emotion4': '😠',
+                    'k-season1': '🌷',
+                    'k-season2': '☀️',
+                    'k-season3': '🍁',
+                    'k-season4': '❄️',
+                    'k-weather1': '☀️',
+                    'k-weather2': '🌥️',
+                    'k-weather3': '🌧️',
+                    'k-weather4': '❄️',
+                    'k-people1': '😎',
+                    'k-people2': '🧑‍🤝‍🧑',
+                    'k-people3': '👨‍👩‍👧',
+                    'k-people4': '👨‍👩‍👧‍👦',
+                    'k-price1': '🪙',
+                    'k-price2': '💵',
+                    'k-price3': '💸',
+                    'k-time1': '🌞',
+                    'k-time2': '🌜',
+                    'k-sex1': '👨',
+                    'k-sex2': '👩',
+                    'k-sex3': '👫'
+                };
+                showEmoji(emojiMap[event.target.id], event.target);
+            });
+        });
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container col-md-10">
+    <h1 class="text-center">Find Your Perfect Dish</h1>
+
+    <form method="post" name="originForm" action="{% url 'ai_ljh:foods_result' %}">{% csrf_token %}
+
+        <!-- 감정 상태 -->
+        <div class="question">
+            <h4>How are you feeling today?</h4>
+            <p>Select your current mood to get the best meal suggestions.</p>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="emotion" id="k-emotion1" value="1">
+                <label class="form-check-label" for="k-emotion1">Joyful</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="emotion" id="k-emotion2" value="2">
+                <label class="form-check-label" for="k-emotion2">Sad</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="emotion" id="k-emotion3" value="3">
+                <label class="form-check-label" for="k-emotion3">Angry</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="emotion" id="k-emotion4" value="4">
+                <label class="form-check-label" for="k-emotion4">Annoyed</label>
+            </div>
+        </div>
+
+        <!-- 계절 -->
+        <div class="question">
+            <h4>What season is it?</h4>
+            <p>Seasons can influence your cravings. What's the weather like?</p>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="season" id="k-season1" value="1">
+                <label class="form-check-label" for="k-season1">Spring</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="season" id="k-season2" value="2">
+                <label class="form-check-label" for="k-season2">Summer</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="season" id="k-season3" value="3">
+                <label class="form-check-label" for="k-season3">Autumn</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="season" id="k-season4" value="4">
+                <label class="form-check-label" for="k-season4">Winter</label>
+            </div>
+        </div>
+
+        <!-- 날씨 -->
+        <div class="question">
+            <h4>What's the weather like?</h4>
+            <p>Is it sunny or rainy? Your perfect meal awaits!</p>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="weather" id="k-weather1" value="1">
+                <label class="form-check-label" for="k-weather1">Sunny</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="weather" id="k-weather2" value="2">
+                <label class="form-check-label" for="k-weather2">Cloudy</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="weather" id="k-weather3" value="3">
+                <label class="form-check-label" for="k-weather3">Rainy</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="weather" id="k-weather4" value="4">
+                <label class="form-check-label" for="k-weather4">Snowy</label>
+            </div>
+        </div>
+
+        <!-- 같이 먹는 사람 수 -->
+        <div class="question">
+            <h4>How many people are dining?</h4>
+            <p>Choosing for yourself or a group? Let’s adjust the portion.</p>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="people" id="k-people1" value="1">
+                <label class="form-check-label" for="k-people1">Solo</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="people" id="k-people2" value="2">
+                <label class="form-check-label" for="k-people2">Two</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="people" id="k-people3" value="3">
+                <label class="form-check-label" for="k-people3">Three</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="people" id="k-people4" value="4">
+                <label class="form-check-label" for="k-people4">Four or more</label>
+            </div>
+        </div>
+
+        <!-- 음식 가격 -->
+        <div class="question">
+            <h4>What's your budget?</h4>
+            <p>Let's find a dish that fits your budget!</p>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="price" id="k-price1" value="1">
+                <label class="form-check-label" for="k-price1">Less than 5,000₩</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="price" id="k-price2" value="2">
+                <label class="form-check-label" for="k-price2">5,000₩ - 10,000₩</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="price" id="k-price3" value="3">
+                <label class="form-check-label" for="k-price3">More than 10,000₩</label>
+            </div>
+        </div>
+
+        <!-- 식사 시간 -->
+        <div class="question">
+            <h4>When is your meal?</h4>
+            <p>Is it lunch or dinner? Let's match your meal timing.</p>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="time" id="k-time1" value="1">
+                <label class="form-check-label" for="k-time1">Lunch</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="time" id="k-time2" value="2">
+                <label class="form-check-label" for="k-time2">Dinner</label>
+            </div>
+        </div>
+
+        <!-- 성별 -->
+        <div class="question">
+            <h4>What's the vibe?</h4>
+            <p>Dining with men, women, or a mix? Set the mood.</p>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sex" id="k-sex1" value="1">
+                <label class="form-check-label" for="k-sex1">Men</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sex" id="k-sex2" value="2">
+                <label class="form-check-label" for="k-sex2">Women</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sex" id="k-sex3" value="3">
+                <label class="form-check-label" for="k-sex3">Mixed</label>
+            </div>
+        </div>
+
+        <!-- 제출 버튼 -->
+        <button class="mt-4 w-100 btn btn-primary btn-lg" type="button" onclick="validResult();">See Results</button>
+    </form>
+</div>
 {% endblock %}

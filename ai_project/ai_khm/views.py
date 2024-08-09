@@ -16,7 +16,7 @@ import numpy as np
 
 # Create your views here.
 def learning(request):
-    df_divorce = pd.read_csv('D:/machine_learing/ai_project/static/file/ai_data/ai_khm/divorce_merge.csv')
+    df_divorce = pd.read_csv(r'C:\Users\User\OneDrive\바탕 화면\2차project\jihan_mr\machine_learing\ai_project\static\file\ai_data\ai_khm\divorce_data.csv')
 
     df_dvc_html = df_divorce.to_html(index=False, classes='table table-bordered')
 
@@ -86,7 +86,7 @@ def learning(request):
 
 # 이혼 확률 데이터 전처리
 def divorce_data_preprocessing():
-    df_divorce = pd.read_csv('D:/machine_learing/ai_project/static/file/ai_data/ai_khm/divorce_merge.csv')
+    df_divorce = pd.read_csv(r'C:\Users\User\OneDrive\바탕 화면\2차project\jihan_mr\machine_learing\ai_project\static\file\ai_data\ai_khm\divorce_data.csv')
 
     df_data = df_divorce.drop(["Divorce_Y_N"], axis=1)
     df_target = df_divorce["Divorce_Y_N"]
@@ -498,9 +498,12 @@ def voting_test_params(request):
 
         return render(request, 'divorce/ai_khm/voting_test_params.html', content)
     
+    
+    
+# *******************************************************************************************************************************************************************************
 # 음식 데이터 전처리
 def food_data_preprocessing():
-    df_raw_foods = pd.read_excel('D:/machine_learing/ai_project/static/file/ai_data/ai_khm/food_data_extend.xlsx')
+    df_raw_foods = pd.read_excel(r'C:\Users\User\OneDrive\바탕 화면\2차project\jihan_mr\machine_learing\ai_project\static\file\ai_data\ai_khm\food_data_extend.xlsx')
 
     df_foods = df_raw_foods.drop(columns=['menu'])
     df_labels = df_raw_foods['menu']
