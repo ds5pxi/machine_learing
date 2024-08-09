@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script defer src="{% static 'css/script.js' %}"></script>
+    <style>
+        .navbar--sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white; /* 배경색을 원하는 색으로 변경 */
+            z-index: 1000; /* 다른 요소들보다 위에 위치하도록 설정 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 선택사항: 약간의 그림자를 추가하여 구분 */
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .navbar--sticky .logo img {
+            max-height: 110px; /* 로고 이미지의 최대 높이를 설정 */
+        }
+        .navbar--sticky nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 50px; /* 네비게이션 아이템 사이의 간격 조정 */
+        }
+        .navbar--sticky nav ul li {
+            display: inline;
+        }
+        .navbar--sticky nav ul li a {
+            text-decoration: none;
+            color: #333; /* 텍스트 색상 */
+            font-weight: bold;
+        }
+        body {
+            padding-top: 80px; /* 네비게이션 바 높이만큼 패딩을 추가하여 콘텐츠가 네비게이션 바에 가려지지 않도록 설정 */
+        }
+        .logo img {
+            width: 150px;  /* 원하는 너비로 조정 */
+            height: auto;  /* 높이는 자동으로 조정 */
+        }
+        h1 {
+            margin-top: 70px;  /* 원하는 여백으로 조정 */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="js-navbar" class="navbar navbar--sticky">
+        <div class="logo">
+            <img src="{% static 'css/이전분 회사 로고.png' %}" alt="Analysis company specializing in separation">
+        </div>
+        <nav class="sp-nav__topmiddle middle-section guest international items--5">
+            <ul>
+                <li><a href="https://www.16personalities.com/ko/%EA%B2%B0%EA%B3%BC/enfj-t/x/3jmec5tjh">미정</a></li>
+                <li><a href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC">재미로 보는 음식 테스트</a></li>
+                <li class="active"><a href="https://www.16personalities.com/ko/%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95">미정</a></li>
+                <li><a href="https://www.16personalities.com/ko/%ED%8C%80-%ED%8F%89%EA%B0%80">팀 소개</a></li>
+                <li><a href="https://www.16personalities.com/ko/%EC%97%B0%EB%9D%BD%EC%B2%98">상담 문의</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <h1>이별 예측 검사</h1> 
+    <h2>각 문항에 대해 0에서 4까지 점수를 매겨주세요.</h2> 
+    <h2>(0: 매우 그렇다, 1: 그렇다, 2: 보통이다, 3: 그렇지 않다, 4: 매우 그렇지 않다)</h2>
+    <form id="surveyForm" action="{% url 'ai_chdg:result' %}" method="post">
+        {% csrf_token %}
+        
+        <div class="question" id="question-1">
+            <p>1. 앞으로 어느 날, 돌이켜보면 애인과 저는 서로 화목하게 지냈다고 생각할 것입니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question1" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question1" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question1" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question1" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question1" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- 동일한 형식으로 다른 질문들 추가 -->
+        <div class="question", id="question-2">
+            <p>2. 제 애인과 저는 결혼이 어떤 모습이어야 하는지에 대해 비슷한 생각을 가지고 있습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question2" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question2" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question2" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question2" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question2" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-3">
+            <p>3. 제 애인과 저는 결혼에서 각자의 역할에 대해 비슷한 생각을 가지고 있습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question3" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question3" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question3" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question3" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question3" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-4">
+            <p>4. 저는 제 애인을 잘 알고 있습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question4" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question4" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question4" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question4" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question4" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-5">
+            <p>5. 저는 애인과 함께 여행하는 것을 즐깁니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question5" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question5" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question5" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question5" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question5" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-6">
+            <p>6. 우리는 인생에서 행복이 무엇인지에 대해 애인과 같은 생각을 가지고 있습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question6" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question6" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question6" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question6" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question6" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-7">
+            <p>7. 우리는 사랑이 어떤 모습이어야 하는지에 대해 애인과 잘 맞습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question7" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question7" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question7" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question7" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question7" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-8">
+            <p>8. 저는 애인과 친구들과 그들의 사회적 관계를 알고 있습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question8" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question8" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question8" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question8" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question8" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-9">
+            <p>9. 제 애인과 저는 개인의 자유에 대해 비슷한 가치관을 가지고 있습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question9" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question9" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question9" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question9" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question9" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-10">
+            <p>10. 저는 애인의 기본적인 불안감을 알고 있습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question10" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question10" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question10" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question10" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question10" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-11">
+            <p>11. 우리의 논의는 종종 갑자기 시작됩니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question11" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question11" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question11" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question11" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question11" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-12">
+            <p>12. 애인과 무언가를 이야기하다 보면 갑자기 침착함이 깨질 때가 있습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question12" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question12" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question12" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question12" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question12" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-13">
+            <p>13. 무슨 일이 일어나고 있는지 정확히 알기 전에 논의를 시작하는 경우가 있습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question13" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question13" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question13" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question13" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question13" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-14">
+            <p>14. 저는 애인의 내면을 잘 알고 있습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question14" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question14" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question14" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question14" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question14" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-15">
+            <p>15. 애인과 현재 스트레스를 받는 이유를 알고 있습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question15" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question15" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question15" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question15" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question15" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-16">
+            <p>16. 애인과 저는 비슷한 꿈을 꾸고 있으며 화목합니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question16" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question16" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question16" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question16" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question16" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-17">
+            <p>17. 저는 애인의 좋아하는 것을 정확히 알고 있습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question17" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question17" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question17" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question17" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question17" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-18">
+            <p>18. 아이나 친구들을 위한 우리의 목표는 대부분 같습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question18" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question18" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question18" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question18" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question18" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-19">
+            <p>19. 애인과의 논의는 차분하지 않습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question19" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question19" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question19" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question19" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question19" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="question" id="question-20">
+            <p>20. 저는 애인과 함께하면서 어떤 스트레스를 받고 있는지 말씀드릴 수 있습니다.</p>
+            <div class="custom-checkbox-group">
+                <label class="custom-checkbox">
+                    <input type="radio" name="question20" value="0" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇다</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question20" value="1" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question20" value="2" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question20" value="3" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </label>
+                <label class="custom-checkbox">
+                    <input type="radio" name="question20" value="4" required>
+                    <span class="radio__tick">
+                        <span class="sp-icon radio__icon icon--md icon--white icon--check">
+                            <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    <span class="label-text">매우 그렇지 않다</span>
+                </label>
+            </div>
+        </div>
+
+        <button type="submit">제출</button>
+    </form>
+
+</body>
+</html>
