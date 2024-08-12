@@ -15,6 +15,48 @@
             <figcaption class="figure-caption text-center">{{food_result}}</figcaption>
         </figure>
     </div>
-    <div id = "map" style = "width:500px;height:400px;"></div>
+    <div class="accordion" id="accordionAll">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" id="foodBtn1" data-bs-toggle="collapse" data-bs-target="#foodAddress1" aria-expanded="true" aria-controls="foodAddress1" onclick="showFoodMap('{{food_info.lat1}}', '{{food_info.lng1}}');">
+                    {{food_info.name1}}
+                </button>
+            </h2>
+            <div id="foodAddress1" class="accordion-collapse collapse show" data-bs-parent="#accordionAll">
+                <div class="accordion-body">
+                    {{food_info.address1}}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" id="foodBtn2" data-bs-toggle="collapse" data-bs-target="#foodAddress2" aria-expanded="false" aria-controls="foodAddress2" onclick="showFoodMap('{{food_info.lat2}}', '{{food_info.lng2}}');">
+                    {{food_info.name2}}
+                </button>
+            </h2>
+            <div id="foodAddress2" class="accordion-collapse collapse" data-bs-parent="#accordionAll">
+                <div class="accordion-body">
+                    {{food_info.address2}}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" id="foodBtn3" data-bs-toggle="collapse" data-bs-target="#foodAddress3" aria-expanded="false" aria-controls="foodAddress3" onclick="showFoodMap('{{food_info.lat3}}', '{{food_info.lng3}}');">
+                    {{food_info.name3}}
+                </button>
+            </h2>
+            <div id="foodAddress3" class="accordion-collapse collapse" data-bs-parent="#accordionAll">
+                <div class="accordion-body">
+                    {{food_info.address3}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {# 음식점 맵 #}
+    <div id="foodMap" class="w-100 mt-5" style="height: 350px;"></div>
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c45eeaea154fd7ffda461413f952a5c"></script>
+    <script src="{% static 'js/foods/ai_khm/result.js' %}" data-lat1="{{food_info.lat1}}" data-lng1="{{food_info.lng1}}"></script>
 </div>
 {% endblock %}
