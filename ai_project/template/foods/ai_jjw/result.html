@@ -1,0 +1,48 @@
+{% extends 'templates.html' %}
+
+{% block title %}테스터 정진우 음식 추천 분석 결과 사이트{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<script type = "text/javascript">
+    function returnPage() {
+        if (confirm("다시 검사할래요?")) {
+            location.href = "/ai_jjw/foods/ai_jjw/foods_learning";
+        }
+    }
+</script>
+<style>
+    .container {
+        margin-top: 20px;
+    }
+    .image-container {
+        display: flex;
+        justify-content: center; /*이미지를 중앙에 배치*/
+        margin-top: 20px; /*위쪽 여백 조정*/
+    }
+    .image-container img {
+        margin: 0 10px; /*이미지 간의 간격*/
+        width: 200px;
+        height: 200px;
+    }
+</style>
+<div class="container col-md-10">
+    <h1 class="py-5 text-center">음식 선호도 조사 결과</h1>
+
+    <div class="text-center mb-5">
+        <figure class="figure" style="width: 50rem; height: 1rem;">
+            <figcaption class="figure-caption text-center">{{food_result}}</figcaption>
+        </figure>
+    </div>
+    
+    <div class="image-container">
+        {% for url in image_urls %}
+            <img src="{{ url }}" alt = "food image">
+        {% endfor %}
+    </div>
+    <div>
+        <button class="mt-4 w-100 btn btn-primary btn-lg" onclick="returnPage();">다시</button>
+    </div>
+</div>
+{% endblock %}
