@@ -1,123 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'templates.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Result</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <script defer>
-        function showResult() {
-            document.getElementById('loadingMessage').style.display = 'none'; // "정밀 분석 중..." 메시지 숨기기
-            document.getElementById('resultContent').style.display = 'block'; // 결과 내용 표시
+{% load static %} <!-- static 태그 로드를 block 바깥에서 해야 함 -->
+
+{% block title %}
+이별 예측 검사 - 두근두근
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<script defer>
+    function showResult() {
+        document.getElementById('loadingMessage').style.display = 'none'; // "정밀 분석 중..." 메시지 숨기기
+        document.getElementById('resultContent').style.display = 'block'; // 결과 내용 표시
+    }
+
+    function addDots() {
+        var loadingMessage = document.getElementById('loadingMessageText');
+        var dots = loadingMessage.innerHTML.split('.').length - 1;
+        if (dots < 3) {
+            loadingMessage.innerHTML += '.';
+        } else {
+            loadingMessage.innerHTML = '정밀 분석 중';
         }
+    }
 
-        function addDots() {
-            var loadingMessage = document.getElementById('loadingMessageText');
-            var dots = loadingMessage.innerHTML.split('.').length - 1;
-            if (dots < 3) {
-                loadingMessage.innerHTML += '.';
-            } else {
-                loadingMessage.innerHTML = '정밀 분석 중';
-            }
-        }
+    window.onload = function () {
+        setInterval(addDots, 500); // 0.5초마다 점 추가
+        setTimeout(showResult, 4000); // 4초 후에 결과 표시
+    };
+</script>
 
-        window.onload = function () {
-            setInterval(addDots, 500); // 0.5초마다 점 추가
-            setTimeout(showResult, 4000); // 4초 후에 결과 표시
-        };
-    </script>
+<style>
+    .result-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 20px;
+        text-align: center;
+    }
 
-    <style>
-        .result-container {
-            display: flex;
-            /* result-container를 플렉스 컨테이너로 설정하여 자식 요소들을 자유롭게 정렬하고 배치할 수 있게 합니다. */
-            align-items: center;
-            /* 수직 축에서 자식 요소들을 중앙에 정렬합니다. */
-            justify-content: center;
-            /* 수평 축에서 자식 요소들을 중앙에 정렬합니다. */
-            flex-direction: column;
-            /* 이미지와 텍스트를 수직으로 정렬하기 위해 플렉스 방향을 column으로 설정 */
-            margin-top: 20px;
-            /* 결과 컨테이너의 위쪽 여백 */
-            text-align: center;
-            /* 텍스트를 중앙 정렬 */
-        }
+    .result-container img {
+        width: 400px;
+        height: auto;
+        margin-right: 10px;
+        margin-bottom: 20px;
+    }
 
-        .result-container img {
-            width: 400px;
-            /* 원하는 크기로 조정 */
-            height: auto;
-            margin-right: 10px;
-            margin-bottom: 20px;
-            /* 이미지와 텍스트 사이에 여백을 추가 */
-        }
+    .result-text {
+        max-width: 600px;
+        margin-left: 10px;
+    }
 
-        .result-text {
-            max-width: 600px;
-            margin-left: 10px;
-        }
+    .img-prediction-1 {
+        width: 600px !important;
+        height: auto !important;
+    }
 
-        .img-prediction-1 {
-            width: 600px !important;
-            height: auto !important;
-        }
+    .img-prediction-0 {
+        width: 400px !important;
+        height: auto !important;
+    }
 
-        .img-prediction-0 {
-            width: 400px !important;
-            height: auto !important;
-        }
+    .retry-button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        text-align: center;
 
-        .retry-button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-            /* 다시 테스트 하기 버튼의 위쪽 여백 */
-            text-align: center;
-        }
+    }
 
-        .retry-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    .retry-button {
+        background-color: #528af4;
+        color: white;
+        padding: 15px 30px;
+        /* 버튼의 패딩을 늘려 크기를 키움 */
+        font-size: 25px;
+        /* 버튼 텍스트의 크기를 키움 */
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 200px;
+        /* 버튼의 너비를 조정 */
+        height: 30px;
+        /* 버튼의 높이를 조정 */
+        border-radius: 0;
 
-        .retry-button:hover {
-            background-color: #45a049;
-        }
+    }
 
-        .custom-result-content {
-            margin-top: 50px;
-            /* 원하는 만큼 조정 */
-            /* 추가적인 스타일을 여기에 작성 */
-        }
+    .retry-button:hover {
+        background-color: #528af4;
+    }
 
-        .logo img {
-            width: 150px;
-            /* 원하는 너비로 조정 */
-            height: auto;
-            /* 높이는 자동으로 조정 */
-            padding-right: 50px;
-            /* margin-right: 50px; 원하는 만큼 조정 */
-        }
+    .custom-result-content {
+        margin-top: 50px;
+    }
 
-        body {
-            background-color: #f4efe4;
-            /* 페이지 배경색 */
-        }
-        
-    </style>
+    #loadingMessage {
+        display: flex;
+        justify-content: center;
+        /* 가로 가운데 정렬 */
+        align-items: center;
+        /* 세로 가운데 정렬 */
+        height: 100vh;
+        /* 페이지 전체 높이를 사용하여 중앙에 배치 */
+    }
 
-</head>
+    #loadingMessageText {
+        text-align: center;
+        /* 텍스트 중앙 정렬 */
+        font-size: 20px;
+        /* 글씨 크기 조정 */
+        font-weight: bold;
+        /* 글씨를 굵게 설정 */
+    }
+</style>
+
+
 
 <div id="loadingMessage">
     <p id="loadingMessageText">정밀 분석 중</p>
 </div>
+
 
 <div id="resultContent" class="custom-result-content" style="display: none;">
     <h1>이별 가능성 분석 결과</h1>
@@ -141,7 +147,4 @@
         <a href="{% url 'ai_chdg:survey' %}" class="retry-button">다시 테스트 하기</a>
     </div>
 </div>
-
-</body>
-
-</html>
+{% endblock %}
