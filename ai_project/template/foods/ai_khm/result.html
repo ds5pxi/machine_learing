@@ -15,13 +15,13 @@
     <h1 class="py-5 text-center">음식 선호도 조사 결과</h1>
 
     <div class="text-center">
-        <figure class="figure" style="width: 50rem; height: 40rem;">
+        <figure class="figure" style="width: 450px; height: 40rem;">
             <img src="{% get_static_prefix %}imgs/food/main/{{food_picture}}" class="figure-img img-fluid rounded" alt="결과 사진">
 
-            <figcaption class="figure-caption text-center">{{food_result}}</figcaption>
+            <figcaption class="figure-caption text-center fs-1">{{food_result}}</figcaption>
         </figure>
     </div>
-    <div class="accordion" id="accordionAll">
+    <div class="accordion" id="accordionAll" style="width: 450px; margin: 0 auto;">
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <button class="accordion-button" type="button" id="foodBtn1" data-bs-toggle="collapse" data-bs-target="#foodAddress1" aria-expanded="true" aria-controls="foodAddress1" onclick="showFoodMap('{{food_info.lat1}}', '{{food_info.lng1}}');">
@@ -60,7 +60,7 @@
         </div>
     </div>
     {# 음식점 맵 #}
-    <div id="foodMap" class="w-100 mt-5" style="height: 350px;"></div>
+    <div id="foodMap" class="mt-5" style="width: 450px; height: 350px; margin: 0 auto;"></div>
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c45eeaea154fd7ffda461413f952a5c"></script>
     <script src="{% static 'js/foods/ai_khm/result.js' %}" data-lat1="{{food_info.lat1}}" data-lng1="{{food_info.lng1}}"></script>
