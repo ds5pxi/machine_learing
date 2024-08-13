@@ -5,21 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}당신의 선택은?{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'main.css' %}"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="{% static 'main.css' %}"> {# Link to your CSS file #}
+
+    {% block header %}{% endblock %}
 </head>
 <body>
-    <!-- Header Section with Logo and Title -->
+    {% block script %}{% endblock %}
+
     <header>
-        <!-- Logo section that redirects to the main page -->
         <a href="/main">
             <img src="{% static 'jihan.jpg' %}" alt="Logo" class="logo">
         </a>
-        <!-- Title Section -->
         <div class="title">
             <span>두근두근</span><strong class="heartbeat">대근 대근 ><</strong>
         </div>
 
-        <!-- Developer List Dropdown -->
         <div class="developer-list">
             <h3 onclick="toggleDeveloperList()">개발자 리스트</h3>
             <ul id="developerList">
@@ -43,21 +43,17 @@
         </div>
     </header>
 
-    <!-- Main Content Section -->
     <main>
-        {% block content %}
-        <!-- Default content if none is provided -->
-        <p>여기에 컨텐츠가 표시됩니다.</p>
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer with horizontal line -->
+    {% block footer %}
     <footer>
-        <hr> <!-- Horizontal line for separation -->
+        <hr>
         <p>KG-itbank 3조 현민,진우,지한,대근</p>
     </footer>
+    {% endblock %}
 
-    <!-- Script to toggle the developer list -->
     <script>
         function toggleDeveloperList() {
             var list = document.getElementById('developerList');
