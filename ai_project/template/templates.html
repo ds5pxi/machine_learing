@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}당신의 선택은?{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'main.css' %}"> {# Link to your CSS file #}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"> {# Link to your CSS file #}
 
     {% block header %}{% endblock %}
 </head>
@@ -14,7 +14,7 @@
 
     <header>
         <a href="/main">
-            <img src="{% static 'jihan.jpg' %}" alt="Logo" class="logo">
+            <img src="{% static 'imgs/jihan.jpg' %}" alt="Logo" class="logo">
         </a>
         <div class="title">
             <span>두근두근</span><strong class="heartbeat">대근 대근 ><</strong>
@@ -24,19 +24,19 @@
             <h3 onclick="toggleDeveloperList()">개발자 리스트</h3>
             <ul id="developerList">
                 <li>
-                    <img src="{% static 'jihan.jpg' %}" alt="이지한" class="dev-photo">
+                    <img src="{% static 'imgs/jihan.jpg' %}" alt="이지한" class="dev-photo">
                     <a href="{% url 'ai_ljh:developer_page_1' %}">이지한</a>
                 </li>
                 <li>
-                    <img src="{% static 'developer2.jpg' %}" alt="최대근" class="dev-photo">
+                    <img src="{% static 'imgs/developer2.jpg' %}" alt="최대근" class="dev-photo">
                     <a href="{% url 'ai_ljh:developer_page_2' %}">최대근</a>
                 </li>
                 <li>
-                    <img src="{% static 'woo.jpg' %}" alt="성진우" class="dev-photo">
+                    <img src="{% static 'imgs/woo.jpg' %}" alt="성진우" class="dev-photo">
                     <a href="{% url 'ai_ljh:developer_page_3' %}">성진우</a>
                 </li>
                 <li>
-                    <img src="{% static 'min.jpg' %}" alt="김현민" class="dev-photo">
+                    <img src="{% static 'imgs/min.jpg' %}" alt="김현민" class="dev-photo">
                     <a href="{% url 'ai_ljh:developer_page_4' %}">김현민</a>
                 </li>
             </ul>
