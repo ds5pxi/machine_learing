@@ -17,7 +17,6 @@ urlpatterns = [
     path('divorce/ai_khm/logistic_regression', views.logistic_regression_view, name='logistic_regression'),
     path('divorce/ai_khm/voting', views.voting_view, name='voting'),
     path('divorce/ai_khm/voting_test_params', views.voting_test_params, name='voting_test_params'),
-    path('foods/ai_khm/learning', views.foods_learning, name='foods_learning'),
     path('foods/ai_khm/survey', views.foods_survey, name='foods_survey'),
     path('foods/ai_khm/result', views.foods_result, name='foods_result'),
 ]

@@ -511,9 +511,6 @@ def food_data_preprocessing():
     return df_foods, df_labels
     
 # 음식 추천 시스템
-def foods_learning(request):
-    return render(request, 'foods/ai_khm/learning.html')
-
 def foods_survey(request):
     return render(request, 'foods/ai_khm/survey.html')
 
