@@ -16,6 +16,9 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 import io
 from django.http import HttpResponse
+import seaborn as sns
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+
 
 # Create your views here.
 def learning(request):
@@ -506,7 +509,6 @@ def voting_test_params(request):
 
 # *******************************************************************************************************************************************************************************
 
-
 # 음식 데이터 전처리
 def food_data_preprocessing():
     df_raw_foods = pd.read_excel(r'C:\Users\User\OneDrive\바탕 화면\2차project\jihan_mr\machine_learing\ai_project\static\file\fd_ljh\food_final.xlsx')
@@ -528,7 +530,7 @@ def select_best_model(df_foods, df_labels):
     # KNN 파라미터 설정 및 GridSearch
     knn_params = {'n_neighbors': range(1, 10)}
     knn = KNeighborsClassifier()
-    knn_grid = GridSearchCV(knn, knn_params, cv=5, scoring='accuracy')
+    knn_grid = GridSearchCV(knn, knn_params, cv=5, scoring='accuracy', n_jobs=-1)
     knn_grid.fit(X_train, y_train)
 
     # 랜덤 포레스트 파라미터 설정 및 GridSearch
@@ -538,7 +540,7 @@ def select_best_model(df_foods, df_labels):
         'min_samples_split': [2, 5, 10]
     }
     rf = RandomForestClassifier(random_state=42)
-    rf_grid = GridSearchCV(rf, rf_params, cv=5, scoring='accuracy')
+    rf_grid = GridSearchCV(rf, rf_params, cv=5, scoring='accuracy', n_jobs=-1)
     rf_grid.fit(X_train, y_train)
 
     # 각 모델의 최적 파라미터와 성능 비교
@@ -558,7 +560,7 @@ def select_best_model(df_foods, df_labels):
     return knn_best, knn_accuracy, rf_best, rf_accuracy
 
 # 그래프 생성 함수
-def create_accuracy_plot(knn_accuracy, rf_accuracy):
+def analyze_graph(knn_accuracy, rf_accuracy):
     plt.figure(figsize=(8, 6))
     models = ['KNN', 'Random Forest']
     accuracies = [knn_accuracy, rf_accuracy]
@@ -579,6 +581,21 @@ def create_accuracy_plot(knn_accuracy, rf_accuracy):
     # 이미지를 base64로 인코딩하여 전달
     graphic = base64.b64encode(image_png).decode('utf-8')
     return graphic
+
+# 분석 결과를 보여줄 함수
+def analyze_result(request, knn_accuracy=0.8, rf_accuracy=0.85):
+    graphic = analyze_graph(knn_accuracy, rf_accuracy)
+
+    # 결과 설명 텍스트 생성
+    result_description = f"KNN 모델의 정확도는 {round(knn_accuracy * 100, 2)}%이고, "\
+                         f"랜덤 포레스트 모델의 정확도는 {round(rf_accuracy * 100, 2)}%입니다."
+
+    content = {
+        "graphic": graphic,
+        "result_description": result_description
+    }
+
+    return render(request, 'foods/ai_ljh/analyze.html', content)
 
 # 음식 결과 시스템
 def foods_result(request):
@@ -667,7 +684,7 @@ def foods_result(request):
     # pred = best_model.predict(X_test)
     # pred = knn.predict(X_test)
     # 정확도 비교 그래프 생성
-    graphic = create_accuracy_plot(knn_accuracy, rf_accuracy)
+    graphic = analyze_graph(knn_accuracy, rf_accuracy)
 
     # 결과 설명 텍스트 생성
     result_description = f"당신의 선택에 따라 추천된 음식은 '{food_dict.get(pred[0])}'입니다. "\
@@ -681,3 +698,17 @@ def foods_result(request):
     }
 
     return render(request, 'foods/ai_ljh/result.html', content)
+
+
+
+def developer_page_1(request):
+    return render(request, 'dev/developer_1.html')
+
+def developer_page_2(request):
+    return render(request, 'dev/developer_2.html')
+
+def developer_page_3(request):
+    return render(request, 'dev/developer_3.html')
+
+def developer_page_4(request):
+    return render(request, 'dev/developer_4.html')

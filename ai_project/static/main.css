@@ -1,0 +1,151 @@
+body {
+    background-color: rgb(226, 226, 223); /* Light beige background color */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Style */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #333; /* 실선으로 구분 */
+}
+
+.logo {
+    width: 60px;
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5em; /* 더 크게 조정 */
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    font-weight: bold;
+}
+
+.title strong {
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+/* Main Content Style */
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Center content vertically */
+    gap: 50px; /* Space between items */
+    border-top: 2px solid #333; /* 실선 추가 */
+    border-bottom: 2px solid #333; /* 실선 추가 */
+}
+
+.menu-item {
+    text-align: center;
+    width: 150px; /* Fixed width for the item */
+    height: 150px; /* Fixed height for the item */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: 1.5em; /* 글자 크기 조정 */
+}
+
+.menu-item:hover {
+    color: #007bff; /* 파란색 텍스트 강조 */
+}
+
+.emoji {
+    font-size: 60px; /* Larger emoji size */
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2em; /* Adjust font size for the text */
+}
+
+/* Developer List Dropdown */
+.developer-list {
+    position: relative;
+    text-align: right;
+}
+
+.developer-list h3 {
+    cursor: pointer;
+    margin: 0;
+    padding: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.developer-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* Hidden by default */
+    position: absolute;
+    right: 0;
+    background-color: transparent;
+    border: none;
+    width: 150px;
+}
+
+.developer-list ul li {
+    margin: 10px 0;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+}
+
+.dev-photo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* 동그랗게 이미지 */
+    margin-right: 10px;
+}
+
+.developer-list ul li span {
+    font-size: 0.9em; /* 작은 글자 크기 */
+}
+
+.developer-list ul li a:hover {
+    background-color: transparent;
+}
+
+.developer-list h3:hover + ul, .developer-list ul:hover {
+    display: block; /* Hover 시 리스트가 표시됨 */
+}
+
+/* Heartbeat animation */
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.2);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    75% {
+        transform: scale(1.1);
+    }
+}
+
+.heartbeat {
+    display: inline-block;
+    animation: heartbeat 1s infinite; /* 애니메이션 반복 */
+    color: red; /* 텍스트 색상, 필요에 따라 변경 */
+}
+
+/* Footer */
+footer {
+    padding: 10px 0; /* Same padding as header */
+    background-color: #fff; /* Same background as header */
+}
