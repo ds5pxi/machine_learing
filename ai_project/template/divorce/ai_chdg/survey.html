@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Survey</title>
@@ -11,44 +12,132 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: white; /* 배경색을 원하는 색으로 변경 */
-            z-index: 1000; /* 다른 요소들보다 위에 위치하도록 설정 */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 선택사항: 약간의 그림자를 추가하여 구분 */
+            background-color: #f4efe4;
+            /* 네비게이션 바 색상 */
+            z-index: 1000;
+            /* 다른 요소들보다 위에 위치하도록 설정 */
+            border-bottom: 3px solid #000;
+            /* 선택사항: 약간의 그림자를 추가하여 구분 */
             display: flex;
+            /* 네비게이션 바의 콘텐츠를 수평으로 나열하기 위해 flexbox 레이아웃을 사용합니다 */
             align-items: center;
+            /* 네비게이션 바 내의 요소들을 수직 중앙에 정렬합니다 */
             padding: 10px 20px;
-        }
-        .navbar--sticky .logo img {
-            max-height: 110px; /* 로고 이미지의 최대 높이를 설정 */
-        }
-        .navbar--sticky nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 50px; /* 네비게이션 아이템 사이의 간격 조정 */
-        }
-        .navbar--sticky nav ul li {
-            display: inline;
-        }
-        .navbar--sticky nav ul li a {
-            text-decoration: none;
-            color: #333; /* 텍스트 색상 */
-            font-weight: bold;
-        }
-        body {
-            padding-top: 80px; /* 네비게이션 바 높이만큼 패딩을 추가하여 콘텐츠가 네비게이션 바에 가려지지 않도록 설정 */
-        }
-        .logo img {
-            width: 150px;  /* 원하는 너비로 조정 */
-            height: auto;  /* 높이는 자동으로 조정 */
-        }
-        h1 {
-            margin-top: 70px;  /* 원하는 여백으로 조정 */
+            /* 네비게이션 바에 상하 10px, 좌우 20px의 패딩을 추가하여 내부 여백을 줍니다 */
         }
 
+        .navbar--sticky .logo img {
+            max-height: 110px;
+            /* 로고 이미지의 최대 높이를 설정 */
+        }
+
+        .navbar--sticky nav ul {
+            list-style: none;
+            /* 네비게이션 메뉴 항목에 기본으로 적용되는 불릿 포인트를 제거합니다 */
+            margin: 0;
+            /* 네비게이션 메뉴의 기본 외부 여백을 제거합니다 */
+            padding: 0;
+            /* 네비게이션 메뉴의 기본 내부 여백을 제거합니다 */
+            display: flex;
+            /* 메뉴 항목을 수평으로 나열하기 위해 flexbox 레이아웃을 사용합니다 */
+            gap: 50px;
+            /* 네비게이션 아이템 사이의 간격 조정 */
+        }
+
+        .navbar--sticky nav ul li {
+            display: inline;
+            /* 각 네비게이션 항목(li)을 인라인 요소로 설정하여 수평으로 나열합니다 */
+        }
+
+        .navbar--sticky nav ul li a {
+            text-decoration: none;
+            /* 네비게이션 항목의 링크에 기본으로 적용되는 밑줄을 제거합니다 */
+            color: #333;
+            /* 텍스트 색상 */
+            font-weight: bold;
+            /* 네비게이션 항목의 텍스트를 굵게 설정합니다 */
+        }
+
+        body {
+            padding-top: 80px;
+            /* 네비게이션 바 높이만큼 패딩을 추가하여 콘텐츠가 네비게이션 바에 가려지지 않도록 설정 */
+            background-color: #f4efe4;
+            /* 페이지 배경색 */
+
+        }
+
+        .logo img {
+            width: 150px;
+            /* 원하는 너비로 조정 */
+            height: auto;
+            /* 높이는 자동으로 조정 */
+            padding-right: 50px;
+            /* margin-right: 50px; 원하는 만큼 조정 */
+        }
+
+        h1 {
+            margin-top: 70px;
+            /* 원하는 여백으로 조정 */
+        }
+
+        .submit-button {
+            background-color: #528af4;
+            /* 배경색 */
+            color: white;
+            /* 글자색 */
+            padding: 10px 20px;
+            border: 2px solid black;
+            /* 검은색 테두리 */
+            border-radius: 0;
+            /* 각진 네모 모양 */
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #878480;
+            /* 마우스를 올렸을 때 배경색 */
+        }
+
+            /* 라디오 버튼 스타일 */
+    .custom-checkbox-group .custom-checkbox input[type="radio"] {
+        display: none; /* 기본 라디오 버튼 숨기기 */
+    }
+
+    .custom-checkbox-group .custom-checkbox {
+        display: inline-flex; /* 요소를 인라인 플렉스 박스로 설정하여 자식 요소를 수평으로 정렬 */
+        align-items: center;  /* 자식 요소들을 수직 중앙에 정렬 */
+        cursor: pointer;      /* 요소 위에 마우스를 올리면 커서가 손 모양으로 변경 */
+        margin-right: 30px;   /* 라디오 버튼들 사이의 간격 */
+
+    }
+
+    .custom-checkbox-group .custom-checkbox .radio__tick {
+        border: 2px solid black; /* 검은색 테두리 */
+        border-radius: 50%;        /* 라디오 버튼을 둥글게 */
+        margin-right: 10px;        /* 라디오 버튼과 그 옆의 텍스트 사이에 10px의 간격을 추가 */
+        display: inline-block;     /* 요소를 인라인 블록으로 설정하여 너비와 높이 조정 가능 */
+        position: relative;        /* 자식 요소들이 이 요소를 기준으로 위치를 설정할 수 있도록 함 */   
+        background-color: white; /* 기본 배경색 */
+
+    }
+
+    /* 선택된 상태의 스타일 */
+    .custom-checkbox-group .custom-checkbox input[type="radio"]:checked + .radio__tick {
+        background-color: #528af4; /* 선택된 상태에서의 색상 (녹색) */
+    }
+
+    /* 라디오 버튼에 마우스를 올렸을 때 */
+    .custom-checkbox-group .custom-checkbox:hover .radio__tick {
+        background-color: #878480; /* 마우스 오버 시 배경색 (회색) */
+    }
+
+    /* 체크된 상태에서 체크 표시 보이기 */
+    .custom-checkbox-group .custom-checkbox input[type="radio"]:checked + .radio__tick::after {
+        display: block;
+    }
     </style>
 </head>
+
 <body>
 
     <div id="js-navbar" class="navbar navbar--sticky">
@@ -57,21 +146,17 @@
         </div>
         <nav class="sp-nav__topmiddle middle-section guest international items--5">
             <ul>
-                <li><a href="https://www.16personalities.com/ko/%EA%B2%B0%EA%B3%BC/enfj-t/x/3jmec5tjh">미정</a></li>
-                <li><a href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC">재미로 보는 음식 테스트</a></li>
-                <li class="active"><a href="https://www.16personalities.com/ko/%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95">미정</a></li>
-                <li><a href="https://www.16personalities.com/ko/%ED%8C%80-%ED%8F%89%EA%B0%80">팀 소개</a></li>
-                <li><a href="https://www.16personalities.com/ko/%EC%97%B0%EB%9D%BD%EC%B2%98">상담 문의</a></li>
+                <li><a href="https://www.16personalities.com/ko/%EA%B2%B0%EA%B3%BC/enfj-t/x/3jmec5tjh">메인</a></li>
             </ul>
         </nav>
     </div>
 
-    <h1>이별 예측 검사</h1> 
-    <h2>각 문항에 대해 0에서 4까지 점수를 매겨주세요.</h2> 
+    <h1>이별 예측 검사</h1>
+    <h2>각 문항에 대해 0에서 4까지 점수를 매겨주세요.</h2>
     <h2>(0: 매우 그렇다, 1: 그렇다, 2: 보통이다, 3: 그렇지 않다, 4: 매우 그렇지 않다)</h2>
     <form id="surveyForm" action="{% url 'ai_chdg:result' %}" method="post">
         {% csrf_token %}
-        
+
         <div class="question" id="question-1">
             <p>1. 앞으로 어느 날, 돌이켜보면 애인과 저는 서로 화목하게 지냈다고 생각할 것입니다.</p>
             <div class="custom-checkbox-group">
@@ -80,7 +165,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -91,7 +178,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -101,7 +190,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -111,7 +202,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -121,7 +214,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -131,7 +226,7 @@
         </div>
 
         <!-- 동일한 형식으로 다른 질문들 추가 -->
-        <div class="question", id="question-2">
+        <div class="question" , id="question-2">
             <p>2. 제 애인과 저는 결혼이 어떤 모습이어야 하는지에 대해 비슷한 생각을 가지고 있습니다.</p>
             <div class="custom-checkbox-group">
                 <label class="custom-checkbox">
@@ -139,7 +234,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -150,7 +247,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -160,7 +259,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -170,7 +271,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -180,7 +283,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -197,7 +302,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -208,7 +315,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -218,7 +327,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -228,7 +339,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -238,7 +351,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -255,7 +370,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -266,7 +383,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -276,7 +395,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -286,7 +407,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -296,7 +419,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -313,7 +438,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -324,7 +451,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -334,7 +463,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -344,7 +475,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -354,7 +487,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -371,7 +506,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -382,7 +519,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -392,7 +531,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -402,7 +543,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -412,7 +555,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -429,7 +574,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -440,7 +587,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -450,7 +599,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -460,7 +611,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -470,7 +623,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -487,7 +642,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -498,7 +655,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -508,7 +667,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -518,7 +679,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -528,7 +691,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -545,7 +710,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -556,7 +723,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -566,7 +735,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -576,7 +747,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -586,7 +759,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -603,7 +778,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -614,7 +791,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -624,7 +803,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -634,7 +815,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -644,7 +827,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -661,7 +846,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -672,7 +859,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -682,7 +871,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -692,7 +883,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -702,7 +895,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -719,7 +914,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -730,7 +927,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -740,7 +939,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -750,7 +951,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -760,7 +963,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -777,7 +982,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -788,7 +995,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -798,7 +1007,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -808,7 +1019,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -818,7 +1031,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -835,7 +1050,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -846,7 +1063,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -856,7 +1075,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -866,7 +1087,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -876,7 +1099,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -893,7 +1118,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -904,7 +1131,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -914,7 +1143,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -924,7 +1155,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -934,7 +1167,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -951,7 +1186,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -962,7 +1199,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -972,7 +1211,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -982,7 +1223,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -992,7 +1235,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1009,7 +1254,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1020,7 +1267,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1030,7 +1279,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1040,7 +1291,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1050,7 +1303,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1067,7 +1322,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1078,7 +1335,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1088,7 +1347,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1098,7 +1359,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1108,7 +1371,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1125,7 +1390,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1136,7 +1403,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1146,7 +1415,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1156,7 +1427,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1166,7 +1439,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1183,7 +1458,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1194,7 +1471,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1204,7 +1483,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1214,7 +1495,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1224,7 +1507,9 @@
                     <span class="radio__tick">
                         <span class="sp-icon radio__icon icon--md icon--white icon--check">
                             <svg viewBox="0 0 48 48" role="img" xmlns="http://www.w3.org/2000/svg">
-                                <path d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z" aria-hidden="true"></path>
+                                <path
+                                    d="m41.766 8.625-26.25 26.25-9.282-9.281a1.126 1.126 0 0 0-1.593 0l-1.06 1.06c-.44.44-.44 1.152 0 1.593L14.72 39.375c.44.44 1.153.44 1.594 0l28.106-28.106c.44-.44.44-1.153 0-1.594l-1.06-1.05a1.126 1.126 0 0 0-1.593 0z"
+                                    aria-hidden="true"></path>
                             </svg>
                         </span>
                     </span>
@@ -1233,8 +1518,9 @@
             </div>
         </div>
 
-        <button type="submit">제출</button>
+        <button type="submit" class="submit-button">제출</button>
     </form>
 
 </body>
+
 </html>

@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-
+from django.conf import settings
+import csv
 import joblib
 import os
 import numpy as np
@@ -53,7 +54,51 @@ def survey(request):
     
     return render(request, 'divorce/ai_chdg/survey.html')
 
+def save_survey_data(request):
+    if request.method == 'POST':
+        # 설문지 데이터 가져오기
+        question1 = request.POST.get('question1')
+        question2 = request.POST.get('question2')
+        question3 = request.POST.get('question3')
+        question4 = request.POST.get('question4')
+        question5 = request.POST.get('question5')
+        question6 = request.POST.get('question6')
+        question7 = request.POST.get('question7')
+        question8 = request.POST.get('question8')
+        question9 = request.POST.get('question9')
+        question10 = request.POST.get('question10')
+        question11 = request.POST.get('question11')
+        question12 = request.POST.get('question12')
+        question13 = request.POST.get('question13')
+        question14 = request.POST.get('question14')
+        question15 = request.POST.get('question15')
+        question16 = request.POST.get('question16')
+        question17 = request.POST.get('question17')
+        question18 = request.POST.get('question18')
+        question19 = request.POST.get('question19')
+        question20 = request.POST.get('question20')
 
+        # CSV 파일 경로 설정
+        csv_file_path = os.path.join(settings.BASE_DIR, 'survey_data.csv') 
+
+        # CSV 파일 존재 여부 확인 밑 헤더 추가
+        file_exists = os.path.isfile(csv_file_path)
+
+        with open(csv_file_path, mode='a', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+
+            # 파일이 존재하지 않으면 헤더 추가
+            if not file_exists:
+                writer.writerow(['harmony','marriage','roles','trust','enjoy_travel','happy','love','friends_social','freeom_value','anxieties','sudden_discussion','calm_breaks'
+                                 ,'idk_whats_going_on','inner_world','current_stress','dreams','likes','people_goals','not_calm','stresses'])
+
+            # 데이터 추가
+            writer.writerow([question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11, question12, question13, question14, question15, question16, question17, question18, question19, question20])    
+            
+        # 결고 페이지로 리다이렉트 또는 결과 보여주기
+        return redirect('result_page')
+    
+    return render(request, 'survey.html')
 
 def result(request):
     if request.method == 'POST':
@@ -75,7 +120,7 @@ def result(request):
                 int(request.POST.get('anxieties')),
                 int(request.POST.get('sudden_discussion')),
                 int(request.POST.get('calm_breaks')),
-                int(request.POST.get("idk_whats_going_on")),
+                int(request.POST.get('idk_whats_going_on')),
                 int(request.POST.get('inner_world')),
                 int(request.POST.get('current_stress')),
                 int(request.POST.get('dreams')),
@@ -98,6 +143,8 @@ def result(request):
 
     return render(request, 'divorce/ai_chdg/survey.html')
 
+def foods_learning(request):
+    return render(request, 'foods/ai_ljh/learning.html');
 
 
 
