@@ -144,8 +144,3 @@ header {
     color: red; /* 텍스트 색상, 필요에 따라 변경 */
 }
 
-/* Footer */
-footer {
-    padding: 10px 0; /* Same padding as header */
-    background-color: #fff; /* Same background as header */
-}
