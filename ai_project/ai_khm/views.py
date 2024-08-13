@@ -503,7 +503,7 @@ def voting_test_params(request):
 # *******************************************************************************************************************************************************************************
 # 음식 데이터 전처리
 def food_data_preprocessing():
-    df_raw_foods = pd.read_excel('D:/machine_learing/ai_project/static/file/ai_data/foods/main/food_data.xlsx')
+    df_raw_foods = pd.read_excel(r'C:\Users\User\OneDrive\바탕 화면\2차project\jihan_mr\machine_learing\ai_project\static\file\ai_data\foods\main\food_data.xlsx')
 
     df_foods = df_raw_foods.drop(columns=['menu'])
     df_labels = df_raw_foods['menu']
