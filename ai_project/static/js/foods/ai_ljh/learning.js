@@ -62,3 +62,55 @@ function validResult() {
         currForm.submit();
     }
 }
+
+// static/js/foods/ai_ljh/learning.js
+
+function showEmoji(emoji, targetElement) {
+    const emojiSpan = document.createElement('span');
+    emojiSpan.textContent = emoji;
+    emojiSpan.classList.add('emoji-pop');
+
+    const rect = targetElement.getBoundingClientRect();
+    emojiSpan.style.left = rect.left + window.pageXOffset + 'px';
+    emojiSpan.style.top = rect.top + window.pageYOffset + 'px';
+
+    document.body.appendChild(emojiSpan);
+
+    setTimeout(() => {
+        emojiSpan.remove();
+    }, 800);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.form-check-input').forEach(input => {
+        input.addEventListener('change', (event) => {
+            const emojiMap = {
+                'k-emotion1': '😚',
+                'k-emotion2': '😢',
+                'k-emotion3': '🤬',
+                'k-emotion4': '😩',
+                'k-season1': '🌷',
+                'k-season2': '☀️',
+                'k-season3': '🍁',
+                'k-season4': '❄️',
+                'k-weather1': '☀️',
+                'k-weather2': '🌥️',
+                'k-weather3': '🌧️',
+                'k-weather4': '❄️',
+                'k-people1': '😎',
+                'k-people2': '🧑‍🤝‍🧑',
+                'k-people3': '👨‍👩‍👧',
+                'k-people4': '👨‍👩‍👧‍👦',
+                'k-price1': '🪙',
+                'k-price2': '💵',
+                'k-price3': '💸',
+                'k-time1': '🌞',
+                'k-time2': '🌜',
+                'k-sex1': '👨',
+                'k-sex2': '👩',
+                'k-sex3': '👫'
+            };
+            showEmoji(emojiMap[event.target.id], event.target);
+        });
+    });
+});

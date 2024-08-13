@@ -1,13 +1,25 @@
 {% extends 'templates.html' %}
 
-{% block title %}3조 AI 프로젝트 메인페이지{% endblock %}
-
-{% load static %}
-
-{% block script %}{% endblock %}
+{% block title %}
+메인 페이지 - 두근두근
+{% endblock %}
 
 {% block content %}
-<main class="col-md-10 ms-sm-auto">
-    <img src="{% static 'imgs/ai-robot.jpg' %}" class="img-fluid" alt="메인 페이지 배경화면">            
-</main>
+<div class="content-container">
+    <!-- Menu Selection Button -->
+    <div class="menu-item">
+        <a href="{% url 'ai_ljh:foods_learning' %}">
+            <div class="emoji">🍽️</div>
+            <h2>메뉴<br>선택</h2>
+        </a>
+    </div>
+
+    <!-- Separation Test Button -->
+    <div class="menu-item">
+        <a href="{% url 'ai_chdg:learning' %}">
+            <div class="emoji">💔</div>
+            <h2>이별<br>테스트</h2>
+        </a>
+    </div>
+</div>
 {% endblock %}

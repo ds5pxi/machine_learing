@@ -1,0 +1,35 @@
+{% extends 'templates.html' %}
+
+{% block title %}음식 추천 분석 결과{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<div class="container col-md-10">
+    <h1 class="py-5 text-center">분석 결과</h1>
+
+    <div class="text-center mb-4">
+        <h2>모델 정확도</h2>
+        <p>현재 모델의 정확도는 85%입니다.</p>
+        <!-- 정확도 그래프 -->
+        <figure class="figure" style="width: 50rem; height: 30rem;">
+            <img src="{% get_static_prefix %}imgs/analysis/accuracy_chart.png" class="figure-img img-fluid rounded"
+                alt="정확도 그래프">
+        </figure>
+    </div>
+
+    <div class="text-center mb-4">
+        <h2>예측값 분포</h2>
+        <p>예측값의 분포를 나타내는 그래프입니다.</p>
+        <!-- 예측값 그래프 -->
+        <figure class="figure" style="width: 50rem; height: 30rem;">
+            <img src="{% get_static_prefix %}imgs/analysis/prediction_distribution.png" class="figure-img img-fluid rounded"
+                alt="예측값 분포">
+        </figure>
+    </div>
+
+    
+</div>
+{% endblock %}
+
+

@@ -20,4 +20,9 @@ urlpatterns = [
     path('foods/ai_ljh/learning', views.foods_learning, name='foods_learning'),
     path('foods/ai_ljh/result', views.foods_result, name='foods_result'),
     path('foods/ai_ljh/select_best_model', views.select_best_model, name='select_best_model'),
+    path('foods/ai_ljh/analyze', views.analyze_result, name='analyze_result'),
+    path('developer-1/', views.developer_page_1, name='developer_page_1'),
+    path('developer-2/', views.developer_page_2, name='developer_page_2'),
+    path('developer-3/', views.developer_page_3, name='developer_page_3'),
+    path('developer-4/', views.developer_page_4, name='developer_page_4'),
 ] 
