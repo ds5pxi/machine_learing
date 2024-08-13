@@ -27,23 +27,35 @@
             setTimeout(showResult, 4000); // 4초 후에 결과 표시
         };
     </script>
+
     <style>
         .result-container {
             display: flex;
+            /* result-container를 플렉스 컨테이너로 설정하여 자식 요소들을 자유롭게 정렬하고 배치할 수 있게 합니다. */
             align-items: center;
+            /* 수직 축에서 자식 요소들을 중앙에 정렬합니다. */
             justify-content: center;
-            margin-top: 50px;
+            /* 수평 축에서 자식 요소들을 중앙에 정렬합니다. */
+            flex-direction: column;
+            /* 이미지와 텍스트를 수직으로 정렬하기 위해 플렉스 방향을 column으로 설정 */
+            margin-top: 20px;
+            /* 결과 컨테이너의 위쪽 여백 */
+            text-align: center;
+            /* 텍스트를 중앙 정렬 */
         }
 
         .result-container img {
             width: 400px;
             /* 원하는 크기로 조정 */
             height: auto;
-            margin-right: 20px;
+            margin-right: 10px;
+            margin-bottom: 20px;
+            /* 이미지와 텍스트 사이에 여백을 추가 */
         }
 
         .result-text {
             max-width: 600px;
+            margin-left: 10px;
         }
 
         .img-prediction-1 {
@@ -56,11 +68,12 @@
             height: auto !important;
         }
 
-        /* 추가된 스타일 */
         .retry-button-container {
             display: flex;
             justify-content: center;
             margin-top: 30px;
+            /* 다시 테스트 하기 버튼의 위쪽 여백 */
+            text-align: center;
         }
 
         .retry-button {
@@ -77,37 +90,58 @@
         .retry-button:hover {
             background-color: #45a049;
         }
+
+        .custom-result-content {
+            margin-top: 50px;
+            /* 원하는 만큼 조정 */
+            /* 추가적인 스타일을 여기에 작성 */
+        }
+
+        .logo img {
+            width: 150px;
+            /* 원하는 너비로 조정 */
+            height: auto;
+            /* 높이는 자동으로 조정 */
+            padding-right: 50px;
+            /* margin-right: 50px; 원하는 만큼 조정 */
+        }
+
+        body {
+            background-color: #f4efe4;
+            /* 페이지 배경색 */
+        }
+        
     </style>
 
 </head>
 
-<body>
-    <div id="loadingMessage">
-        <p id="loadingMessageText">정밀 분석 중</p>
-    </div>
-    <div id="resultContent" style="display: none;">
-        <h1>이별 가능성 분석 결과</h1>
-        {% if error %}
-        <p>오류 발생: {{ error }}</p>
-        {% else %}
-        <div class="result-container">
-            <img src="{% if prediction == 1 %}{% static 'css/image1.avif' %}{% else %}{% static 'css/image.png' %}{% endif %}"
-                alt="{% if prediction == 1 %}위기{% else %}영원{% endif %}"
-                class="{% if prediction == 1 %}img-prediction-1{% else %}img-prediction-0{% endif %}">
+<div id="loadingMessage">
+    <p id="loadingMessageText">정밀 분석 중</p>
+</div>
 
-            <div class="result-text">
-                <p>예측: {% if prediction == 1 %}멀어지는 중이에요{% else %}관계가 깊어지고 있어요{% endif %}</p>
-                <p>예측 정확도: {{ probability }}%</p>
-            </div>
-        </div>
-        {% endif %}
-        
-        <!-- 추가된 부분: 다시 테스트 하기 버튼 -->
-        <div class="retry-button-container">
-            <a href="{% url 'ai_chdg:survey' %}" class="retry-button">다시 테스트 하기</a>
-        </div>
+<div id="resultContent" class="custom-result-content" style="display: none;">
+    <h1>이별 가능성 분석 결과</h1>
+    {% if error %}
+    <p>오류 발생: {{ error }}</p>
+    {% else %}
+    <div class="result-container">
+        <img src="{% if prediction == 1 %}{% static 'css/image1.avif' %}{% else %}{% static 'css/image.png' %}{% endif %}"
+            alt="{% if prediction == 1 %}위기{% else %}영원{% endif %}"
+            class="{% if prediction == 1 %}img-prediction-1{% else %}img-prediction-0{% endif %}">
 
+        <div class="result-text">
+            <p>예측: {% if prediction == 1 %}멀어지는 중이에요{% else %}관계가 깊어지고 있어요{% endif %}</p>
+            <p>예측 정확도: {{ probability }}%</p>
+        </div>
     </div>
+    {% endif %}
+
+    <!-- 추가된 부분: 다시 테스트 하기 버튼 -->
+    <div class="retry-button-container">
+        <a href="{% url 'ai_chdg:survey' %}" class="retry-button">다시 테스트 하기</a>
+    </div>
+</div>
+
 </body>
 
 </html>

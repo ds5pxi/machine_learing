@@ -1,0 +1,103 @@
+{% extends 'templates.html' %}
+
+{% block title %}테스터 김현민 음식 추천 분석 사이트{% endblock %}
+
+{% load static %}
+
+{% block script %}
+<script src="{% static 'js/foods/ai_khm/survey.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/food/custom.css' %}">
+
+<div class="container col-md-10">
+    <h1 class="py-5 text-center">상황에 따른 음식 선호도 조사</h1>
+
+    <main class="LayoutContainer_main__xooO9" style="height: auto !important;">
+        <div class="SelectMenuA_container__CwCv2" style="height: auto !important;">
+            <form method="post" name="originForm" action="{% url 'ai_khm:foods_result' %}">{% csrf_token %}
+                <div class="SelectMenuA_filterWrapper__egD5g">
+                    <div class="SelectMenuRadioFilter_container__GpKcY">
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="emotion1" onclick="clickSurveyLabel(this);">기쁨</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="emotion2" onclick="clickSurveyLabel(this);">슬픔</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="emotion3" onclick="clickSurveyLabel(this);">분노</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="emotion4" onclick="clickSurveyLabel(this);">짜증</label>
+        
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="emotion1" name="emotion" value="1">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="emotion2" name="emotion" value="2">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="emotion3" name="emotion" value="3">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="emotion4" name="emotion" value="4">
+                    </div>
+                    <div class="SelectMenuA_filterDivider__H0cKX"></div>
+                    <div class="SelectMenuRadioFilter_container__GpKcY">
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="season1" onclick="clickSurveyLabel(this);">봄</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="season2" onclick="clickSurveyLabel(this);">여름</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="season3" onclick="clickSurveyLabel(this);">가을</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="season4" onclick="clickSurveyLabel(this);">겨울</label>
+        
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="season1" name="season" value="1">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="season2" name="season" value="2">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="season3" name="season" value="3">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="season4" name="season" value="4">
+                    </div>
+                    <div class="SelectMenuA_filterDivider__H0cKX"></div>
+                    <div class="SelectMenuRadioFilter_container__GpKcY">
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="weather1" onclick="clickSurveyLabel(this);">맑음</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="weather2" onclick="clickSurveyLabel(this);">흐림</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="weather3" onclick="clickSurveyLabel(this);">비</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="weather4" onclick="clickSurveyLabel(this);">눈</label>
+        
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="weather1" name="weather" value="1">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="weather2" name="weather" value="2">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="weather3" name="weather" value="3">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="weather4" name="weather" value="4">
+                    </div>
+                    <div class="SelectMenuA_filterDivider__H0cKX"></div>
+                    <div class="SelectMenuRadioFilter_container__GpKcY">
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="people1" onclick="clickSurveyLabel(this);">혼자</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="people2" onclick="clickSurveyLabel(this);">2인</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="people3" onclick="clickSurveyLabel(this);">3인</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="people4" onclick="clickSurveyLabel(this);">4인 이상</label>
+        
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="people1" name="people" value="1">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="people2" name="people" value="2">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="people3" name="people" value="3">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="people4" name="people" value="4">
+                    </div>
+                    <div class="SelectMenuA_filterDivider__H0cKX"></div>
+                    <div class="SelectMenuRadioFilter_container__GpKcY">
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="price1" onclick="clickSurveyLabel(this);">5,000원 미만</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="price2" onclick="clickSurveyLabel(this);">5,000원 이상 10,000원 미만</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="price3" onclick="clickSurveyLabel(this);">10,000원 이상</label>
+        
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="price1" name="price" value="1">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="price2" name="price" value="2">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="price3" name="price" value="3">
+                    </div>
+                    <div class="SelectMenuA_filterDivider__H0cKX"></div>
+                    <div class="SelectMenuRadioFilter_container__GpKcY">
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="time1" onclick="clickSurveyLabel(this);">점심</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="time2" onclick="clickSurveyLabel(this);">저녁</label>
+        
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="time1" name="time" value="1">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="time2" name="time" value="2">
+                    </div>
+                    <div class="SelectMenuA_filterDivider__H0cKX"></div>
+                    <div class="SelectMenuRadioFilter_container__GpKcY">
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="sex1" onclick="clickSurveyLabel(this);">남</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="sex2" onclick="clickSurveyLabel(this);">여</label>
+                        <label class="SelectMenuRadioFilter_radioLabel__9hZOn" for="sex3" onclick="clickSurveyLabel(this);">혼성</label>
+        
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="sex1" name="sex" value="1">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="sex2" name="sex" value="2">
+                        <input class="SelectMenuRadioFilter_radionInput__nG6NE" type="radio" id="sex3" name="sex" value="3">
+                    </div>
+                </div>
+        
+                <button class="SelectMenuA_suggestButton__HIRxu" type="button" onclick="validResult();">결과 보기</button>
+            </form>
+        </div>
+    </main>
+</div>
+{% endblock %}
