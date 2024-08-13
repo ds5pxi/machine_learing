@@ -20,12 +20,3 @@ def korean():
         pass
 
     matplotlib.rcParams['axes.unicode_minus'] = False
-
-def foods_survey(request):
-    return render(request, 'foods/main/survey.html')
-
-def foods_ml(request):
-    return redirect('foods_result')
-
-def foods_result(request):
-    return render(request, 'foods/main/result.html')

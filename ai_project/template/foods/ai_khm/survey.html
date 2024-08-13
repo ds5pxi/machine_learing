@@ -4,14 +4,16 @@
 
 {% load static %}
 
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/food/custom.css' %}">
+{% endblock %}
+
 {% block script %}
 <script src="{% static 'js/foods/ai_khm/survey.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/food/custom.css' %}">
-
-<div class="container col-md-10">
+<div class="container">
     <h1 class="py-5 text-center">상황에 따른 음식 선호도 조사</h1>
 
     <main class="LayoutContainer_main__xooO9" style="height: auto !important;">
