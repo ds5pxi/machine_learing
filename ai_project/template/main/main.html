@@ -4,10 +4,46 @@
 
 {% load static %}
 
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock %}
+
 {% block script %}{% endblock %}
 
 {% block content %}
-<main class="col-md-10 ms-sm-auto">
-    <img src="{% static 'imgs/ai-robot.jpg' %}" class="img-fluid" alt="메인 페이지 배경화면">            
-</main>
+<div id="app" class="container">
+    <div class="mt-3 container">
+        <div class="container">
+            <div class="jumbotron p-3 bg-light">
+                <h1>이별 및 음식 관련 인공지능</h1>
+                <hr>
+                <p>
+                    이별 측정 및 날씨, 감정 등에 따라 선호하는 음식을 판별하는 사이트입니다. 하단에 있는 측정하고 싶은 것을 선택해 주세요.
+                </p>
+            </div>
+            <div>
+                <div class="row" style="height: 37rem;">
+                    <div class="col-md-6 col-lg-4 col-12">
+                        <div class="jumbotron p-3">
+                            <h2>이별률 측정</h2>
+                            <p>부부 또는 연인 등이 이별할 확률을 검사해 볼 수 있습니다.</p>
+                            <a href="{% url 'ai_chdg:survey' %}">
+                                <button type="button" class="btn btn-dark">측정 시작</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-12">
+                        <div class="jumbotron p-3">
+                            <h2>음식 선호도 측정</h2>
+                            <p>날씨, 감정 등에 따라 먹고 싶은 음식을 확인해 볼 수 있습니다.</p>
+                            <a href="{% url 'ai_khm:foods_survey' %}">
+                                <button type="button" class="btn btn-dark">측정 시작</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
