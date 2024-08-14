@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}당신의 선택은?{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}"> {# Link to your CSS file #}
+    <script src="{% static 'js/main/templates.js' %}"></script>
 
     {% block header %}{% endblock %}
 </head>
@@ -52,12 +53,5 @@
         <p>KG-itbank 3조 현민,진우,지한,대근</p>
     </footer>
     {% endblock %}
-
-    <script>
-        function toggleDeveloperList() {
-            var list = document.getElementById('developerList');
-            list.style.display = (list.style.display === 'block') ? 'none' : 'block';
-        }
-    </script>
 </body>
 </html>

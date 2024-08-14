@@ -49,7 +49,7 @@ def foods_result(request):
     }
 
     # 저장된 파일 경로
-    file_path = r'C:\Users\user\Desktop\machine_learing\ai_project\static\file\food_jjw\foodsearch.csv'
+    file_path = r'D:\machine_learing\ai_project\static\file\food_jjw\foodsearch.csv'
     
     # 파일 읽기
     df = pd.read_csv(file_path)
@@ -143,7 +143,7 @@ def foods_result(request):
     return render(request, 'foods/ai_jjw/result.html')
 
 def learning(request):
-    df_divorce = pd.read_csv(r'C:\Users\user\Desktop\machine_learing\ai_project\static\file\ai_data\ai_khm\divorce_merge.csv')
+    df_divorce = pd.read_csv(r'D:\machine_learing\ai_project\static\file\ai_data\ai_khm\divorce_merge.csv')
 
     df_dvc_html = df_divorce.to_html(index=False, classes='table table-bordered')
 
@@ -212,7 +212,7 @@ def learning(request):
     return render(request, 'divorce/ai_jjw/learning.html', content)
 
 def divorce_data_preprocessing():
-    df_divorce = pd.read_csv(r'C:\Users\user\Desktop\machine_learing\ai_project\static\file\ai_data\ai_khm\divorce_merge.csv')
+    df_divorce = pd.read_csv(r'D:\machine_learing\ai_project\static\file\ai_data\ai_khm\divorce_merge.csv')
 
     df_data = df_divorce.drop(["Divorce_Y_N"], axis=1)
     df_target = df_divorce["Divorce_Y_N"]

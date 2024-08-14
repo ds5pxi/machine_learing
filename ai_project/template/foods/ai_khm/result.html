@@ -1,6 +1,6 @@
 {% extends 'templates.html' %}
 
-{% block title %}테스터 김현민 음식 추천 분석 결과 사이트{% endblock %}
+{% block title %}음식 추천 분석 결과 사이트{% endblock %}
 
 {% load static %}
 
@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container" style="height: 90rem;">
+<div class="container">
     <h1 class="py-5 text-center">음식 선호도 조사 결과</h1>
 
     <div class="text-center">
@@ -64,5 +64,7 @@
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c45eeaea154fd7ffda461413f952a5c"></script>
     <script src="{% static 'js/foods/ai_khm/result.js' %}" data-lat1="{{food_info.lat1}}" data-lng1="{{food_info.lng1}}"></script>
+
+    <img src="data:image/png;base64, {{food_graph|safe}}" class="mx-auto d-block mt-5" style="width: 450px;" alt="음식 KNN 모델 정확도 그래프">
 </div>
 {% endblock %}

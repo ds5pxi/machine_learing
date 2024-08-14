@@ -6,8 +6,7 @@
 이별 예측 검사 - 두근두근
 {% endblock %}
 
-{% block content %}
-
+{% block header %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 <script defer>
     function showResult() {
@@ -117,9 +116,9 @@
         /* 글씨를 굵게 설정 */
     }
 </style>
+{% endblock %}
 
-
-
+{% block content %}
 <div id="loadingMessage">
     <p id="loadingMessageText">정밀 분석 중</p>
 </div>
@@ -131,7 +130,7 @@
     <p>오류 발생: {{ error }}</p>
     {% else %}
     <div class="result-container">
-        <img src="{% if prediction == 1 %}{% static 'css/image1.avif' %}{% else %}{% static 'css/image.png' %}{% endif %}"
+        <img src="{% if prediction == 1 %}{% static 'imgs/divorce/image1.avif' %}{% else %}{% static 'imgs/divorce/image.png' %}{% endif %}"
             alt="{% if prediction == 1 %}위기{% else %}영원{% endif %}"
             class="{% if prediction == 1 %}img-prediction-1{% else %}img-prediction-0{% endif %}">
 
@@ -142,7 +141,7 @@
     </div>
     {% endif %}
 
-    <!-- 추가된 부분: 다시 테스트 하기 버튼 -->
+    {# 추가된 부분: 다시 테스트 하기 버튼 #}
     <div class="retry-button-container">
         <a href="{% url 'ai_chdg:survey' %}" class="retry-button">다시 테스트 하기</a>
     </div>

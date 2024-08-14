@@ -1,15 +1,9 @@
 from django.shortcuts import render, redirect
-from django.core.paginator import Paginator
 from django.conf import settings
 import csv
 import joblib
 import os
 import numpy as np
-import pickle
-
-# Create your views here.(기존에 있던 함수)
-def learning(request):
-    return render(request, 'divorce/ai_chdg/learning.html');
 
 # 모델 불러오기
 model_path = os.path.join(os.path.dirname(__file__), 'knn_model.pkl')

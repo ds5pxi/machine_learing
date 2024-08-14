@@ -6,11 +6,8 @@
 이별 예측 검사 - 두근두근
 {% endblock %}
 
-{% block content %}
-
+{% block header %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-<script defer src="{% static 'css/script.js' %}"></script>
-
 <style>
     .submit-button {
         background-color: #528af4;
@@ -84,7 +81,10 @@
         /* 체크 표시를 숨깁니다 */
     }
 </style>
+<script defer src="{% static 'js/divorce/script.js' %}"></script>
+{% endblock %}
 
+{% block content %}
 <h1>이별 예측 검사</h1>
 <h2>각 문항에 대해 0에서 4까지 점수를 매겨주세요.</h2>
 <h2>(0: 매우 그렇다, 1: 그렇다, 2: 보통이다, 3: 그렇지 않다, 4: 매우 그렇지 않다)</h2>
@@ -1454,8 +1454,5 @@
 
     <button type="submit" class="submit-button">제출</button>
 </form>
-
-
-
 
 {% endblock %}
