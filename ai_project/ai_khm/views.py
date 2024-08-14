@@ -32,7 +32,8 @@ def food_data_preprocessing():
 def food_knn_accuracy_graph(data, labels):
     korean()        # 한글 셋팅
     
-    plt.clf()       # 화면 초기화
+    if plt.get_backend().upper() == "AGG":
+        plt.clf()       # 메모리에 파이플롯 데이터 존재 시 화면 초기화
 
     training_accuracy = []
     test_accuracy = []
