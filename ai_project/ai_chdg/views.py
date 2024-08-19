@@ -38,7 +38,7 @@ def survey(request):
         # 모델 예측
         data = np.array(responses).reshape(1, -1)
         prediction = model.predict(data)[0]
-        probability = model.predict_proba(data)[0][prediction]
+        probability = round(model.predict_proba(data)[0][prediction] * 100, 2)      # 백분율 계산 및 소수점 2자리 반올림 처리
         
         # 결과 페이지 렌더링
         return render(request, 'divorce/ai_chdg/result.html', {
@@ -136,9 +136,3 @@ def result(request):
         })
 
     return render(request, 'divorce/ai_chdg/survey.html')
-
-def foods_learning(request):
-    return render(request, 'foods/ai_ljh/learning.html');
-
-
-
